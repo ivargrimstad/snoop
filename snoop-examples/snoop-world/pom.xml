@@ -6,7 +6,7 @@
    <version>1.0.0-SNAPSHOT</version>
    <packaging>war</packaging>
 
-   <name>Snoop Demo</name>
+   <name>Snoop World</name>
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
