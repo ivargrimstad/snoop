@@ -31,8 +31,8 @@ import eu.agilejava.snoop.eureka.annotation.EnableEurekaClient;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@EnableSnoopClient(applicationName = "snoopysnoop")
-@EnableEurekaClient(applicationName = "snoopyeureka")
+@EnableSnoopClient(applicationName = "worldsnoop")
+@EnableEurekaClient(applicationName = "worldeureka")
 public class ApplicationConfig {
    
 }

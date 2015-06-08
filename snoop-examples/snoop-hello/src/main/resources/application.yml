@@ -1,6 +1,6 @@
 snoop:
    applicationName: snoopydemo
-   applicationHome: http://localhost:8080/snoopy-demo/
+   applicationHome: http://localhost:8080/snoop-hello-service/
 #   serviceUrl: ws://localhost:8080/snoop-service/
    serviceUrl: ws://192.168.59.103:8081/snoop-service/
 
