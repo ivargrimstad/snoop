@@ -6,7 +6,7 @@
    <version>1.0.0-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Snoop Spring Eureka Service</name>
+   <name>Spring Eureka Service</name>
    <properties>
       <start-class>eu.agilejava.eureka.EurekaServer</start-class>
    </properties>

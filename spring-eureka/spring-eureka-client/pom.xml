@@ -6,7 +6,7 @@
    <version>1.0.0-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Snoop Spring Eureka Client</name>
+   <name>Spring Eureka Client</name>
 
    <properties>
       <start-class>eu.agilejava.eureka.Application</start-class>
