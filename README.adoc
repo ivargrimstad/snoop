@@ -1,2 +1,2 @@
-= SNOOP - A discovery service for Java EE
+= SNOOP - A Discovery Service for Java EE
 
