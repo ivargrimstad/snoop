@@ -1,0 +1,18 @@
+server:
+  port: 8761
+
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl:
+         defaultZone: http://localhost:8761/eureka/
+   server:
+      waitTimeInMsWhenSyncEmpty: 0
+      
+logging:
+   level:
+      com.netflix.eureka.resources: 'OFF'
+      com.netflix.discovery: 'OFF'
+      org.springframework.cloud: 'DEBUG'
+    
