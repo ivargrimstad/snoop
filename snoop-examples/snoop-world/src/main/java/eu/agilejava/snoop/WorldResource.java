@@ -23,26 +23,19 @@
  */
 package eu.agilejava.snoop;
 
-import eu.agilejava.snoop.annotation.EnableSnoopClient;
-import eu.agilejava.snoop.eureka.annotation.EnableEurekaClient;
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@EnableSnoopClient(applicationName = "hellosnoop")
-//@EnableEurekaClient(applicationName = "helloeureka")
-@ApplicationPath("api")
-public class ApplicationConfig extends Application {
-
-   @Override
-   public Set<Class<?>> getClasses() {
-      Set<Class<?>> resources = new HashSet<>();
-      resources.add(HelloResource.class);
-      return resources;
+@Path("world")
+public class WorldResource {
+   
+   @GET
+   public Response greet() {
+      return Response.ok("world").build();
    }
 }
