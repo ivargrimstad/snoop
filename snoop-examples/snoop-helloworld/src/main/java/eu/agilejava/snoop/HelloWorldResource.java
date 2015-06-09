@@ -23,6 +23,8 @@
  */
 package eu.agilejava.snoop;
 
+import eu.agilejava.snoop.annotation.Snoop;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -34,6 +36,10 @@ import javax.ws.rs.core.Response;
 @Path("helloworld")
 public class HelloWorldResource {
    
+   @Inject
+   @Snoop(lookup = "jalla")
+   private String hello;
+           
    @GET
    public Response greet() {
       
