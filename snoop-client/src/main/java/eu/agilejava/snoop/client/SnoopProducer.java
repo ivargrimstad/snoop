@@ -21,9 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop;
+package eu.agilejava.snoop.client;
 
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
 import eu.agilejava.snoop.annotation.Snoop;
+import java.util.Map;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 
@@ -31,12 +37,40 @@ import javax.enterprise.inject.spi.InjectionPoint;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
+@ApplicationScoped
 public class SnoopProducer {
-   
-   @Produces
-   @Snoop
-   public String lookup(InjectionPoint ip) {
 
-      return ip.getAnnotated().getAnnotation(Snoop.class).lookup();
+   private static final String DEFAULT_BASE_URI = "ws://localhost:8080/snoop-service/";
+   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
+
+   private String serviceUrl;
+   
+   @Snoop
+   @Produces
+   @Dependent
+   public SnoopDiscoveryClient lookup(InjectionPoint ip) {
+
+      final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).applicationName();
+
+      LOGGER.config(() -> "producing " + applicationName);
+
+      return new SnoopDiscoveryClient.Builder(applicationName)
+              .serviceUrl(serviceUrl)
+              .build();
    }
+
+   @PostConstruct
+   private void init() {
+
+      Yaml yaml = new Yaml();
+      Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
+
+      Map<String, String> snoopConfig = (Map<String, String>) props.get("snoop");
+
+      serviceUrl = snoopConfig.get("serviceUrl") != null ? snoopConfig.get("serviceUrl") : DEFAULT_BASE_URI;
+
+      LOGGER.config(() -> "Service URL: " + serviceUrl);
+
+   }
+
 }

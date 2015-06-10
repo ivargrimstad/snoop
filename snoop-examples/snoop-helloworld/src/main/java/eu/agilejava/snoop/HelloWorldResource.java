@@ -24,6 +24,8 @@
 package eu.agilejava.snoop;
 
 import eu.agilejava.snoop.annotation.Snoop;
+import eu.agilejava.snoop.client.SnoopDiscoveryClient;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -35,15 +37,32 @@ import javax.ws.rs.core.Response;
  */
 @Path("helloworld")
 public class HelloWorldResource {
-   
+
+   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
+
    @Inject
-   @Snoop(lookup = "jalla")
-   private String hello;
-           
+   @Snoop(applicationName = "snoop-hello-service")
+   private SnoopDiscoveryClient helloService;
+
+   @Inject
+   @Snoop(applicationName = "snoop-world-service")
+   private SnoopDiscoveryClient worldService;
+
    @GET
    public Response greet() {
+
+      LOGGER.info(() -> "jalla " + helloService);
+
+      String helloResponse = helloService.simpleGet("hello")
+              .orElse(Response.noContent().build())
+              .readEntity(String.class);
+
+      LOGGER.info(() -> "response " + helloResponse);
       
+      String worldResponse = worldService.simpleGet("world")
+              .orElse(Response.noContent().build())
+              .readEntity(String.class);
       
-      return Response.ok("hello").build();
+      return Response.ok(helloResponse + " " + worldResponse).build();
    }
 }
