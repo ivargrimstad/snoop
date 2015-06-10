@@ -45,5 +45,5 @@ import javax.inject.Qualifier;
 public @interface Snoop {
    
    @Nonbinding
-   String applicationName() default "unknown";
+   String applicationName() default "";
 }
