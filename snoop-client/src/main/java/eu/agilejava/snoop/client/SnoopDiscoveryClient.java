@@ -25,6 +25,7 @@ package eu.agilejava.snoop.client;
 
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -40,6 +41,9 @@ public class SnoopDiscoveryClient {
    
    private final String applicationName;
    private final String serviceUrl;
+   
+   @EJB
+   private SnoopApplicationClient snoopClient;
    
    static final class Builder {
 
@@ -63,17 +67,16 @@ public class SnoopDiscoveryClient {
    private SnoopDiscoveryClient(final Builder builder) {
       this.applicationName = builder.applicationName;
       this.serviceUrl = builder.serviceUrl;
-      LOGGER.info(() -> "client created for " + applicationName);
+      LOGGER.info(() -> "client created for " + applicationName);      
    }
    
    public WebTarget getServiceRoot() {
       
+      SnoopConfig snoopConfig = getConfigFromSnoop();
       LOGGER.fine(() -> "looking up service for " + applicationName);
-      
       return ClientBuilder.newClient()
-              .target("http://localhost:8080")
-              .path(applicationName)
-              .path("api");
+              .target(snoopConfig.getApplicationHome())
+              .path(snoopConfig.getApplicationServiceRoot());
    }
    
    public Optional<Response> simpleGet(String resourcePath) {
@@ -82,6 +85,23 @@ public class SnoopDiscoveryClient {
               .path(resourcePath)
               .request()
               .get()) : Optional.empty();
+   }
+   
+   private SnoopConfig getConfigFromSnoop() throws SnoopServiceUnavailableException {
+      
+      Response response = ClientBuilder.newClient()
+              .target(serviceUrl)
+              .path("api")
+              .path("lookup")
+              .path(applicationName)
+              .request()
+              .get();
+      
+      if(response.getStatus() == 200) {
+         return response.readEntity(SnoopConfig.class);
+      } else {
+         throw new SnoopServiceUnavailableException();
+      }
    }
    
    public boolean serviceUp() {

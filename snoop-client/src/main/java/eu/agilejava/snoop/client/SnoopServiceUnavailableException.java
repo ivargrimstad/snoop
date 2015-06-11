@@ -21,30 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop.ui;
+package eu.agilejava.snoop.client;
 
-import eu.agilejava.snoop.SnoopClientRegistry;
-import java.util.Set;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.ejb.ApplicationException;
 
 /**
- * Controller for the snoop service UI.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@Named
-@RequestScoped
-public class SnoopController {
-
-   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
-
-   @EJB
-   private SnoopClientRegistry clients;
-
-   public Set<String> getClients() {
-      return clients.getClients();
-   }
+@ApplicationException
+public class SnoopServiceUnavailableException extends RuntimeException{
+   
 }

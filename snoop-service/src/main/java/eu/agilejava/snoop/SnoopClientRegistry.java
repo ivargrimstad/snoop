@@ -25,9 +25,10 @@ package eu.agilejava.snoop;
 
 import java.util.Calendar;
 import static java.util.Calendar.getInstance;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.ejb.Singleton;
@@ -43,17 +44,25 @@ public class SnoopClientRegistry {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
-   private final Map<String, Long> clients = new HashMap<>();
+   private final Map<String, Long> clients = new ConcurrentHashMap<>();
+   private final Map<String, SnoopConfig> clientConfigurations = new ConcurrentHashMap<>();
 
-   public void register(final String clientId) {
+   public void updateTimestamp(final String clientId) {
       Calendar now = getInstance();
       clients.put(clientId, now.getTimeInMillis());
+   }
+   
+   public void register(final SnoopConfig client) {
+      Calendar now = getInstance();
+      clients.put(client.getApplicationName(), now.getTimeInMillis());
+      clientConfigurations.put(client.getApplicationName(), client);
 
-      LOGGER.config(() -> "Client: " + clientId + " registered up at " + now.getTime());
+      LOGGER.config(() -> "Client: " + client.getApplicationName() + " registered up at " + now.getTime());
    }
 
    public void deRegister(final String clientId) {
       clients.remove(clientId);
+      clientConfigurations.remove(clientId);
 
       LOGGER.config(() -> "Client: " + clientId + " deregistered at " + Calendar.getInstance().getTime());
    }
@@ -63,5 +72,9 @@ public class SnoopClientRegistry {
       return clients.keySet().stream()
               .filter(c -> clients.get(c) > System.currentTimeMillis() - 60000)
               .collect(Collectors.toSet());
+   }
+   
+   public Optional<SnoopConfig> getClientConfig(String clientId) {
+      return Optional.ofNullable(clientConfigurations.get(clientId));
    }
 }

@@ -24,6 +24,7 @@
 package eu.agilejava.snoop.scan;
 
 import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import eu.agilejava.snoop.client.SnoopConfig;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Calendar;
@@ -62,7 +63,7 @@ public class SnoopClient {
    private static final String STATUS_ENDPOINT = "snoopstatus/";
 
    private String serviceUrl;
-   private String applicationName;
+   private final SnoopConfig applicationConfig = new SnoopConfig();
 
    @Resource
    private TimerService timerService;
@@ -76,11 +77,11 @@ public class SnoopClient {
 
          readProperties();
 
-         if (applicationName != null) {
-            LOGGER.config(() -> "Registering " + applicationName);
-            register(applicationName);
+         if (applicationConfig.getApplicationName() != null) {
+            LOGGER.config(() -> "Registering " + applicationConfig.getApplicationName());
+            register(applicationConfig.getApplicationName());
          } else {
-            LOGGER.config(() -> "Registering with name from annotation: " + applicationName);
+            LOGGER.config(() -> "Registering with name from annotation: " + SnoopExtensionHelper.getApplicationName());
             register(SnoopExtensionHelper.getApplicationName());
          }
 
@@ -90,7 +91,8 @@ public class SnoopClient {
    }
 
    public void register(final String clientId) {
-      sendMessage(REGISTER_ENDPOINT, clientId);
+      
+      sendMessage(REGISTER_ENDPOINT, applicationConfig.toJSON());
 
       ScheduleExpression schedule = new ScheduleExpression();
       schedule.second("*/10").minute("*").hour("*").start(Calendar.getInstance().getTime());
@@ -112,14 +114,14 @@ public class SnoopClient {
    @OnMessage
    public void onMessage(Session session, String message) {
       LOGGER.config(() -> "Message: " + message);
-      sendMessage(STATUS_ENDPOINT + applicationName, "UP");
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "UP");
    }
 
    @Timeout
    public void health(Timer timer) {
       LOGGER.config(() -> "health update: " + Calendar.getInstance().getTime());
       LOGGER.config(() -> "Next: " + timer.getNextTimeout());
-      sendMessage(STATUS_ENDPOINT + applicationName, "UP");
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "UP");
    }
 
    /**
@@ -130,7 +132,7 @@ public class SnoopClient {
     * @return a return message
     */
    private String sendMessage(String endpoint, String msg) {
-
+      
       LOGGER.config(() -> "Sending message: " + msg);
 
       String returnValue = "-1";
@@ -151,8 +153,8 @@ public class SnoopClient {
    @PreDestroy
    private void deregister() {
 
-      LOGGER.config(() -> "Deregistering " + applicationName);
-      sendMessage(STATUS_ENDPOINT + applicationName, "OUT_OF_SERVICE");
+      LOGGER.config(() -> "Deregistering " + applicationConfig.getApplicationName());
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "OUT_OF_SERVICE");
    }
 
    private void readProperties() {
@@ -161,8 +163,11 @@ public class SnoopClient {
 
       Map<String, String> snoopConfig = (Map<String, String>) props.get("snoop");
 
-      applicationName = snoopConfig.get("applicationName");
-      LOGGER.config(() -> "application name: " + applicationName);
+      applicationConfig.setApplicationName(snoopConfig.get("applicationName"));
+      applicationConfig.setApplicationHome(snoopConfig.get("applicationHome"));
+      applicationConfig.setApplicationServiceRoot(snoopConfig.get("applicationServiceRoot"));
+      
+      LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
       serviceUrl = snoopConfig.get("serviceUrl") != null ? snoopConfig.get("serviceUrl") : DEFAULT_BASE_URI;
    }

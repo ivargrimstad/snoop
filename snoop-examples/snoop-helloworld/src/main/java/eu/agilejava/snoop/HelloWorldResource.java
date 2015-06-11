@@ -41,7 +41,7 @@ public class HelloWorldResource {
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
    @Inject
-   @Snoop(applicationName = "snoop-hello-service")
+   @Snoop(applicationName = "snoophello")
    private SnoopDiscoveryClient helloService;
 
    @Inject
@@ -54,15 +54,15 @@ public class HelloWorldResource {
       LOGGER.info(() -> "jalla " + helloService);
 
       String helloResponse = helloService.simpleGet("hello")
-              .orElse(Response.noContent().build())
-              .readEntity(String.class);
+              .map(r -> r.readEntity(String.class))
+              .orElse("");
 
       LOGGER.info(() -> "response " + helloResponse);
-      
-      String worldResponse = worldService.simpleGet("world")
-              .orElse(Response.noContent().build())
-              .readEntity(String.class);
-      
-      return Response.ok(helloResponse + " " + worldResponse).build();
+
+//      String worldResponse = worldService.simpleGet("world")
+//              .map(r -> r.readEntity(String.class))
+//              .orElse("");
+
+      return Response.ok(helloResponse + " " + "").build();
    }
 }

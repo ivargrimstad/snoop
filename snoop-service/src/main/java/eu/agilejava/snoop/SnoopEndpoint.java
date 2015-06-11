@@ -23,6 +23,7 @@
  */
 package eu.agilejava.snoop;
 
+import static eu.agilejava.snoop.SnoopConfig.fromJSON;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -46,7 +47,10 @@ public class SnoopEndpoint {
    @OnMessage
    public String onMessage(String message) {
       LOGGER.config(() -> "Registering: " + message);
-      clients.register(message);
+      
+      SnoopConfig client = fromJSON(message);
+      
+      clients.register(client);
       return "snoopstatus/" + message;
    }
 

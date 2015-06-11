@@ -50,7 +50,7 @@ public class SnoopStatusEndpoint {
       LOGGER.config(() -> "Client: " + clientId + ", status: " + message);
 
       if ("UP".equals(message)) {
-         clients.register(clientId);
+         clients.updateTimestamp(clientId);
       } else if ("OUT_OF_SERVICE".equals(message)) {
          clients.deRegister(clientId);
       }

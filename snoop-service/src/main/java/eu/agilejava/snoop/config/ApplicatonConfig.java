@@ -21,30 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop.ui;
+package eu.agilejava.snoop.config;
 
-import eu.agilejava.snoop.SnoopClientRegistry;
+import eu.agilejava.snoop.SnoopLookupResource;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
- * Controller for the snoop service UI.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@Named
-@RequestScoped
-public class SnoopController {
+@ApplicationPath("api")
+public class ApplicatonConfig extends Application {
 
-   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
-
-   @EJB
-   private SnoopClientRegistry clients;
-
-   public Set<String> getClients() {
-      return clients.getClients();
-   }
+//   @Override
+//   public Set<Class<?>> getClasses() {
+//      
+//      Set<Class<?>> classes = new HashSet<>();
+//      classes.add(SnoopLookupResource.class);
+//      
+//      return classes;
+//   }
 }

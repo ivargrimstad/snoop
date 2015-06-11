@@ -21,30 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop.ui;
+package eu.agilejava.snoop;
 
-import eu.agilejava.snoop.SnoopClientRegistry;
-import java.util.Set;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import javax.ws.rs.core.Response;
 
 /**
- * Controller for the snoop service UI.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@Named
-@RequestScoped
-public class SnoopController {
-
-   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
+@Path("lookup")
+@ApplicationScoped
+public class SnoopLookupResource {
 
    @EJB
-   private SnoopClientRegistry clients;
+   private SnoopClientRegistry snoopClientRegistry;
 
-   public Set<String> getClients() {
-      return clients.getClients();
+   @GET
+   @Produces(APPLICATION_JSON)
+   @Path("{clientId}")
+   public Response lookup(@PathParam("clientId") String clientId) {
+
+      return Response.ok(snoopClientRegistry.getClientConfig(clientId)
+              .orElseThrow(NotFoundException::new)).build();
    }
+
 }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop.client;
+package eu.agilejava.snoop;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -36,8 +36,8 @@ import javax.json.stream.JsonGenerator;
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 public class SnoopConfig {
-
-   private String applicationName;
+   
+    private String applicationName;
    private String applicationHome;
    private String applicationServiceRoot;
 
