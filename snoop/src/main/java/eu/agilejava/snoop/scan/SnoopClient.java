@@ -114,14 +114,14 @@ public class SnoopClient {
    @OnMessage
    public void onMessage(Session session, String message) {
       LOGGER.config(() -> "Message: " + message);
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "UP");
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), applicationConfig.toJSON());
    }
 
    @Timeout
    public void health(Timer timer) {
       LOGGER.config(() -> "health update: " + Calendar.getInstance().getTime());
       LOGGER.config(() -> "Next: " + timer.getNextTimeout());
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "UP");
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), applicationConfig.toJSON());
    }
 
    /**
@@ -154,7 +154,7 @@ public class SnoopClient {
    private void deregister() {
 
       LOGGER.config(() -> "Deregistering " + applicationConfig.getApplicationName());
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), "OUT_OF_SERVICE");
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), null);
    }
 
    private void readProperties() {

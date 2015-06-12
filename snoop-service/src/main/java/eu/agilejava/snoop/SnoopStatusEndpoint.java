@@ -23,6 +23,7 @@
  */
 package eu.agilejava.snoop;
 
+import static eu.agilejava.snoop.SnoopConfig.fromJSON;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -32,7 +33,7 @@ import javax.websocket.server.ServerEndpoint;
 
 /**
  * WebSocket endpoint for heartbeats.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ServerEndpoint("/snoopstatus/{clientId}")
@@ -45,13 +46,13 @@ public class SnoopStatusEndpoint {
    private SnoopClientRegistry clients;
 
    @OnMessage
-   public void onMessage(@PathParam("clientId") String clientId, String message) {
+   public void onMessage(@PathParam("clientId") String clientId, String applicationConfig) {
 
-      LOGGER.config(() -> "Client: " + clientId + ", status: " + message);
+      LOGGER.config(() -> "Client: " + clientId + ", status: " + applicationConfig);
 
-      if ("UP".equals(message)) {
-         clients.updateTimestamp(clientId);
-      } else if ("OUT_OF_SERVICE".equals(message)) {
+      if (applicationConfig != null) {
+         clients.register(fromJSON(applicationConfig));
+      } else {
          clients.deRegister(clientId);
       }
    }

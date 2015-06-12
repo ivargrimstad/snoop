@@ -47,11 +47,6 @@ public class SnoopClientRegistry {
    private final Map<String, Long> clients = new ConcurrentHashMap<>();
    private final Map<String, SnoopConfig> clientConfigurations = new ConcurrentHashMap<>();
 
-   public void updateTimestamp(final String clientId) {
-      Calendar now = getInstance();
-      clients.put(clientId, now.getTimeInMillis());
-   }
-   
    public void register(final SnoopConfig client) {
       Calendar now = getInstance();
       clients.put(client.getApplicationName(), now.getTimeInMillis());
