@@ -15,6 +15,7 @@ Example:
 
 == Service Discovery
 
+To discover a service, use the @Snoop qualifier to inject a client to the registered service.
 Example:
 
  @Inject
