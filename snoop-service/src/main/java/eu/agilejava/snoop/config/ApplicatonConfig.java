@@ -36,12 +36,12 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("api")
 public class ApplicatonConfig extends Application {
 
-//   @Override
-//   public Set<Class<?>> getClasses() {
-//      
-//      Set<Class<?>> classes = new HashSet<>();
-//      classes.add(SnoopLookupResource.class);
-//      
-//      return classes;
-//   }
+   @Override
+   public Set<Class<?>> getClasses() {
+      
+      Set<Class<?>> classes = new HashSet<>();
+      classes.add(SnoopLookupResource.class);
+      
+      return classes;
+   }
 }

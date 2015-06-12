@@ -24,7 +24,6 @@
 package eu.agilejava.snoop;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
@@ -38,7 +37,6 @@ import javax.ws.rs.core.Response;
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @Path("lookup")
-@ApplicationScoped
 public class SnoopLookupResource {
 
    @EJB
