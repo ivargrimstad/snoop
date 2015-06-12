@@ -1,8 +1,9 @@
 snoop:
-   applicationName: worldsnoop
+   applicationName: snoopworld
    applicationHome: http://localhost:8080/snoop-world-service/
-#   serviceUrl: ws://localhost:8080/snoop-service/
-   serviceUrl: ws://192.168.59.103:8081/snoop-service/
+   applicationServiceRoot: api
+   serviceUrl: ws://localhost:8080/snoop-service/
+#   serviceUrl: ws://192.168.59.103:8081/snoop-service/
 
 eureka:
   client:

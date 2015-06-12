@@ -35,60 +35,71 @@ import javax.ws.rs.core.Response;
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 public class SnoopDiscoveryClient {
-   
+
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
    private static final String DEFAULT_BASE_URI = "ws://localhost:8080/snoop-service/";
-   
+
    private final String applicationName;
    private final String serviceUrl;
-   
+
    @EJB
    private SnoopApplicationClient snoopClient;
-   
+
    static final class Builder {
 
       private final String applicationName;
       private String serviceUrl = DEFAULT_BASE_URI;
-      
+
       Builder(final String applicationName) {
          this.applicationName = applicationName;
       }
-      
+
       Builder serviceUrl(final String serviceUrl) {
          this.serviceUrl = serviceUrl;
          return this;
       }
-      
+
       SnoopDiscoveryClient build() {
          return new SnoopDiscoveryClient(this);
-      }      
+      }
    }
-   
+
    private SnoopDiscoveryClient(final Builder builder) {
       this.applicationName = builder.applicationName;
       this.serviceUrl = builder.serviceUrl;
-      LOGGER.info(() -> "client created for " + applicationName);      
+      LOGGER.info(() -> "client created for " + applicationName);
    }
-   
-   public WebTarget getServiceRoot() {
-      
+
+   public WebTarget getServiceRoot() throws SnoopServiceUnavailableException {
+
       SnoopConfig snoopConfig = getConfigFromSnoop();
       LOGGER.fine(() -> "looking up service for " + applicationName);
+
       return ClientBuilder.newClient()
               .target(snoopConfig.getApplicationHome())
               .path(snoopConfig.getApplicationServiceRoot());
    }
-   
+
    public Optional<Response> simpleGet(String resourcePath) {
-      
-      return serviceUp() ? Optional.of(getServiceRoot()
-              .path(resourcePath)
-              .request()
-              .get()) : Optional.empty();
+
+      Optional<Response> returnValue = Optional.empty();
+
+      try {
+
+         returnValue = Optional.of(getServiceRoot()
+                 .path(resourcePath)
+                 .request()
+                 .get());
+
+      } catch (SnoopServiceUnavailableException e) {
+         LOGGER.warning(() -> "Service unavailable for " + applicationName);
+      }
+
+      return returnValue;
    }
-   
+
    private SnoopConfig getConfigFromSnoop() throws SnoopServiceUnavailableException {
-      
+
       Response response = ClientBuilder.newClient()
               .target(serviceUrl)
               .path("api")
@@ -96,17 +107,11 @@ public class SnoopDiscoveryClient {
               .path(applicationName)
               .request()
               .get();
-      
-      if(response.getStatus() == 200) {
+
+      if (response.getStatus() == 200) {
          return response.readEntity(SnoopConfig.class);
       } else {
          throw new SnoopServiceUnavailableException();
       }
    }
-   
-   public boolean serviceUp() {
-      
-      // todo implement
-      return true;
-   } 
 }

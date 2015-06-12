@@ -50,7 +50,7 @@ public class SnoopStatusEndpoint {
 
       LOGGER.config(() -> "Client: " + clientId + ", status: " + applicationConfig);
 
-      if (applicationConfig != null) {
+      if (applicationConfig != null && !applicationConfig.isEmpty()) {
          clients.register(fromJSON(applicationConfig));
       } else {
          clients.deRegister(clientId);

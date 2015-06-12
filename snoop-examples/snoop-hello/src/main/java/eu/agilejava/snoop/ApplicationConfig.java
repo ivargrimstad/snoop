@@ -24,7 +24,6 @@
 package eu.agilejava.snoop;
 
 import eu.agilejava.snoop.annotation.EnableSnoopClient;
-import eu.agilejava.snoop.eureka.annotation.EnableEurekaClient;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -34,7 +33,8 @@ import javax.ws.rs.core.Application;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@EnableSnoopClient(applicationName = "hellosnoop")
+@EnableSnoopClient
+//@EnableSnoopClient(applicationName = "hellosnoop")
 //@EnableEurekaClient(applicationName = "helloeureka")
 @ApplicationPath("api")
 public class ApplicationConfig extends Application {

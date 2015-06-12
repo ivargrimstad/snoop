@@ -45,7 +45,7 @@ public class HelloWorldResource {
    private SnoopDiscoveryClient helloService;
 
    @Inject
-   @Snoop(applicationName = "snoop-world-service")
+   @Snoop(applicationName = "snoopworld")
    private SnoopDiscoveryClient worldService;
 
    @GET
@@ -54,15 +54,17 @@ public class HelloWorldResource {
       LOGGER.info(() -> "jalla " + helloService);
 
       String helloResponse = helloService.simpleGet("hello")
+              .filter(r -> r.getStatus() == 200)
               .map(r -> r.readEntity(String.class))
-              .orElse("");
+              .orElse("goodbye");
 
       LOGGER.info(() -> "response " + helloResponse);
 
-//      String worldResponse = worldService.simpleGet("world")
-//              .map(r -> r.readEntity(String.class))
-//              .orElse("");
+      String worldResponse = worldService.simpleGet("world")
+              .filter(r -> r.getStatus() == 200)
+              .map(r -> r.readEntity(String.class))
+              .orElse("");
 
-      return Response.ok(helloResponse + " " + "").build();
+      return Response.ok(helloResponse + " " + worldResponse).build();
    }
 }

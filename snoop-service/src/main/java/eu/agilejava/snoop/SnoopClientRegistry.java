@@ -34,9 +34,8 @@ import java.util.stream.Collectors;
 import javax.ejb.Singleton;
 
 /**
- * Register of clients that have registered themselves.
- * Automatically disregarded after a minute without heartbeat.
- * 
+ * Register of clients that have registered themselves. Automatically disregarded after a minute without heartbeat.
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @Singleton
@@ -68,8 +67,15 @@ public class SnoopClientRegistry {
               .filter(c -> clients.get(c) > System.currentTimeMillis() - 60000)
               .collect(Collectors.toSet());
    }
-   
+
    public Optional<SnoopConfig> getClientConfig(String clientId) {
-      return Optional.ofNullable(clientConfigurations.get(clientId));
+
+      if (getClients().contains(clientId)) {
+
+         return Optional.ofNullable(clientConfigurations.get(clientId));
+
+      } else {
+         return Optional.empty();
+      }
    }
 }
