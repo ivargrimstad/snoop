@@ -14,4 +14,17 @@
       <module>snoop-helloworld</module>
    </modules>
 
+   <repositories>
+      <repository>
+         <id>snoop</id>
+         <url>http://nexus.agilejava.eu/nexus/content/groups/public</url>
+         <releases>
+            <enabled>true></enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </repository>
+   </repositories>
+
 </project>
