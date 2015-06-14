@@ -26,6 +26,7 @@ package eu.agilejava.snoop.client;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -100,17 +101,22 @@ public class SnoopDiscoveryClient {
 
    private SnoopConfig getConfigFromSnoop() throws SnoopServiceUnavailableException {
 
-      Response response = ClientBuilder.newClient()
-              .target(serviceUrl)
-              .path("api")
-              .path("services")
-              .path(applicationName)
-              .request()
-              .get();
+      try {
+         Response response = ClientBuilder.newClient()
+                 .target(serviceUrl)
+                 .path("api")
+                 .path("services")
+                 .path(applicationName)
+                 .request()
+                 .get();
 
-      if (response.getStatus() == 200) {
-         return response.readEntity(SnoopConfig.class);
-      } else {
+         if (response.getStatus() == 200) {
+            return response.readEntity(SnoopConfig.class);
+         } else {
+            throw new SnoopServiceUnavailableException();
+         }
+
+      } catch (ProcessingException e) {
          throw new SnoopServiceUnavailableException();
       }
    }
