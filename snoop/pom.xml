@@ -33,5 +33,16 @@
          <version>2.5.1</version>
       </dependency>
    </dependencies>
+
+   <distributionManagement>
+      <repository>
+         <id>agilejava-releases</id>
+         <url>http://nexus.agilejava.eu/nexus/content/repositories/releases</url>
+      </repository>
+      <snapshotRepository>
+         <id>agilejava-snapshots</id>
+         <url>http://nexus.agilejava.eu/nexus/content/repositories/snapshots</url>
+      </snapshotRepository>
+   </distributionManagement>
    
 </project>

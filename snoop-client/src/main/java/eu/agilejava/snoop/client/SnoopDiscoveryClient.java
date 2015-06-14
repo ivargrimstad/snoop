@@ -103,7 +103,7 @@ public class SnoopDiscoveryClient {
       Response response = ClientBuilder.newClient()
               .target(serviceUrl)
               .path("api")
-              .path("lookup")
+              .path("services")
               .path(applicationName)
               .request()
               .get();

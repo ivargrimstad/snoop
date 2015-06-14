@@ -36,7 +36,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@Path("lookup")
+@Path("services")
 public class SnoopLookupResource {
 
    @EJB
@@ -44,11 +44,11 @@ public class SnoopLookupResource {
 
    @GET
    @Produces(APPLICATION_JSON)
-   @Path("{clientId}")
-   public Response lookup(@PathParam("clientId") String clientId) {
+   @Path("{serviceId}")
+   public Response lookup(@PathParam("serviceId") String serviceId) {
 
-      return Response.ok(snoopClientRegistry.getClientConfig(clientId)
+      return Response.ok(snoopClientRegistry.getClientConfig(serviceId)
               .orElseThrow(NotFoundException::new)).build();
    }
-
+   
 }
