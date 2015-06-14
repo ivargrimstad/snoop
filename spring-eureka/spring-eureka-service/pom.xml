@@ -13,7 +13,7 @@
 
    <parent>
       <groupId>eu.agilejava</groupId>
-      <artifactId>snoop-spring-eureka</artifactId>
+      <artifactId>spring-eureka</artifactId>
       <version>1.0.0-SNAPSHOT</version>
    </parent>
    
