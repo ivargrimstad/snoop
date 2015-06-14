@@ -58,7 +58,7 @@ import javax.websocket.WebSocketContainer;
 public class SnoopClient {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
-   private static final String DEFAULT_BASE_URI = "ws://localhost:8080/snoop-service/";
+   private static final String DEFAULT_SERVICE_HOST = "localhost:8080/snoop-service/";
    private static final String REGISTER_ENDPOINT = "snoop";
    private static final String STATUS_ENDPOINT = "snoopstatus/";
 
@@ -91,7 +91,7 @@ public class SnoopClient {
    }
 
    public void register(final String clientId) {
-      
+
       sendMessage(REGISTER_ENDPOINT, applicationConfig.toJSON());
 
       ScheduleExpression schedule = new ScheduleExpression();
@@ -132,7 +132,7 @@ public class SnoopClient {
     * @return a return message
     */
    private String sendMessage(String endpoint, String msg) {
-      
+
       LOGGER.config(() -> "Sending message: " + msg);
 
       String returnValue = "-1";
@@ -166,9 +166,9 @@ public class SnoopClient {
       applicationConfig.setApplicationName(snoopConfig.get("applicationName"));
       applicationConfig.setApplicationHome(snoopConfig.get("applicationHome"));
       applicationConfig.setApplicationServiceRoot(snoopConfig.get("applicationServiceRoot"));
-      
+
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
-      serviceUrl = snoopConfig.get("serviceUrl") != null ? snoopConfig.get("serviceUrl") : DEFAULT_BASE_URI;
+      serviceUrl = "ws://" + (snoopConfig.get("serviceHost") != null ? snoopConfig.get("serviceHost") : DEFAULT_SERVICE_HOST);
    }
 }

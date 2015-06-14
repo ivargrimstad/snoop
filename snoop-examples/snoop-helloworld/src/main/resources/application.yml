@@ -1,6 +1,6 @@
 snoop:
-#   serviceUrl: http://localhost:8080/snoop-service/
-   serviceUrl: http://192.168.59.103:8081/snoop-service/
+#   serviceHost: localhost:8080/snoop-service/
+   serviceHost: 192.168.59.103:8081/snoop-service/
 
 eureka:
   client:

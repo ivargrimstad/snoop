@@ -40,11 +40,11 @@ import javax.enterprise.inject.spi.InjectionPoint;
 @ApplicationScoped
 public class SnoopProducer {
 
-   private static final String DEFAULT_BASE_URI = "ws://localhost:8080/snoop-service/";
+   private static final String DEFAULT_BASE_HOST = "localhost:8080/snoop-service/";
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
    private String serviceUrl;
-   
+
    @Snoop
    @Produces
    @Dependent
@@ -67,7 +67,7 @@ public class SnoopProducer {
 
       Map<String, String> snoopConfig = (Map<String, String>) props.get("snoop");
 
-      serviceUrl = snoopConfig.get("serviceUrl") != null ? snoopConfig.get("serviceUrl") : DEFAULT_BASE_URI;
+      serviceUrl = "http://" + (snoopConfig.get("serviceHost") != null ? snoopConfig.get("serviceHost") : DEFAULT_BASE_HOST);
 
       LOGGER.config(() -> "Service URL: " + serviceUrl);
 

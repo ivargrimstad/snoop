@@ -25,7 +25,6 @@ package eu.agilejava.snoop.client;
 
 import java.util.Optional;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -38,13 +37,10 @@ import javax.ws.rs.core.Response;
 public class SnoopDiscoveryClient {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
-   private static final String DEFAULT_BASE_URI = "ws://localhost:8080/snoop-service/";
+   private static final String DEFAULT_BASE_URI = "http://localhost:8080/snoop-service/";
 
    private final String applicationName;
    private final String serviceUrl;
-
-   @EJB
-   private SnoopApplicationClient snoopClient;
 
    static final class Builder {
 
