@@ -8,14 +8,40 @@
 
    <name>Snoop Root</name>
 
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <netbeans.hint.license>mit</netbeans.hint.license>
+   </properties>
+
    <modules>
       <module>snoop</module>
       <module>snoop-client</module>
       <module>snoop-service</module>
-      <module>snoop-eureka</module>
-      <module>spring-eureka</module>
-      <module>snoop-examples</module>
    </modules>
+   
+   <dependencies>
+      
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-web-api</artifactId>
+         <version>7.0</version>
+         <scope>provided</scope>
+      </dependency>
+   
+   </dependencies>
+
+   <distributionManagement>
+      <repository>
+         <id>agilejava-releases</id>
+         <url>http://nexus.agilejava.eu/nexus/content/repositories/releases</url>
+      </repository>
+      <snapshotRepository>
+         <id>agilejava-snapshots</id>
+         <url>http://nexus.agilejava.eu/nexus/content/repositories/snapshots</url>
+      </snapshotRepository>
+   </distributionManagement>
 
    <scm>
       <connection>scm:git:ssh://git@bitbucket.org:ivargrimstad/snoop.git</connection>
