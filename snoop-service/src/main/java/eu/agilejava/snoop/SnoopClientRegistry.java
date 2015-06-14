@@ -25,6 +25,7 @@ package eu.agilejava.snoop;
 
 import java.util.Calendar;
 import static java.util.Calendar.getInstance;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -66,6 +67,10 @@ public class SnoopClientRegistry {
       return clients.keySet().stream()
               .filter(c -> clients.get(c) > System.currentTimeMillis() - 60000)
               .collect(Collectors.toSet());
+   }
+   
+   public Collection<SnoopConfig> getServiceConfigs() {
+      return clientConfigurations.values();
    }
 
    public Optional<SnoopConfig> getClientConfig(String clientId) {

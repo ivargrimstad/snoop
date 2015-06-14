@@ -44,6 +44,12 @@ public class SnoopLookupResource {
 
    @GET
    @Produces(APPLICATION_JSON)
+   public Response all() {
+      return Response.ok(snoopClientRegistry.getServiceConfigs()).build();
+   }
+   
+   @GET
+   @Produces(APPLICATION_JSON)
    @Path("{serviceId}")
    public Response lookup(@PathParam("serviceId") String serviceId) {
 
