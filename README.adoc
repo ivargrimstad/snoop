@@ -4,7 +4,18 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
 == Service Registration
 
-To register a service with snoop, all you need to do is annotate a class in the service with @EnableSnoopClient.
+. Start the Snoop Service
+
+ docker run -it -p 8081:8080 ivargrimstad/snoop-service
+
+. To enable logging (optional)
+
+ docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
+ docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
+
+. Configure the service by editing the application.yml file
+
+. To register a service with snoop, all you need to do is annotate a class in the service with @EnableSnoopClient.
 
 Example:
 
@@ -16,7 +27,7 @@ Example:
 
 == Service Discovery
 
-To discover a service, use the @Snoop qualifier to inject a client to the registered service.
+. To discover a service, use the @Snoop qualifier to inject a client to the registered service.
 
 Example:
 
@@ -27,7 +38,14 @@ Example:
     String helloResponse = helloService.simpleGet("hello")
               .filter(r -> r.getStatus() == 200)
               .map(r -> r.readEntity(String.class))
-              .orElse("goodbye"); 
- ---
-
+              .orElse("goodbye");
+ ...
+ // or
+    try {
+       WebTarget endpoint = helloService.getServiceRoot();
+       ...
+    } catch(SnoopServiceUnavailableException e) {
+    ...
+    } 
+...
 
