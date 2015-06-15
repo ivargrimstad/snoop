@@ -95,6 +95,24 @@ public class SnoopDiscoveryClient {
       return returnValue;
    }
 
+   public Optional<Response> simpleDelete(String resourcePath) {
+
+      Optional<Response> returnValue = Optional.empty();
+
+      try {
+
+         returnValue = Optional.of(getServiceRoot()
+                 .path(resourcePath)
+                 .request()
+                 .delete());
+
+      } catch (SnoopServiceUnavailableException e) {
+         LOGGER.warning(() -> "Service unavailable for " + applicationName);
+      }
+
+      return returnValue;
+   }
+
    private SnoopConfig getConfigFromSnoop() throws SnoopServiceUnavailableException {
 
       try {
