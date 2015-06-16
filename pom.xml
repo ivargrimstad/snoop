@@ -7,6 +7,24 @@
    <packaging>pom</packaging>
 
    <name>Snoop Root</name>
+   <description>Snoop - A Discovery Service for Java EE.</description>
+   <url>https://github.com/ivargrimstad/snoop</url>
+
+   <licenses>
+      <license>
+         <name>MIT License</name>
+         <url>http://www.opensource.org/licenses/mit-license.php</url>
+      </license>
+   </licenses>
+
+   <developers>
+      <developer>
+         <name>Ivar Grimstad</name>
+         <email>ivar.grimstad@gmail.com</email>
+         <organization>AgileJava</organization>
+         <organizationUrl>http://www.agilejava.eu</organizationUrl>
+      </developer>
+   </developers>
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
