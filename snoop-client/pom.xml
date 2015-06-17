@@ -7,6 +7,7 @@
    <packaging>jar</packaging>
 
    <name>Snoop Client</name>
+   <description>Snoop Discovery Client.</description>
 
    <parent>
       <groupId>eu.agilejava</groupId>

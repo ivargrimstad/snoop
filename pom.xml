@@ -66,5 +66,12 @@
       <developerConnection>scm:git:ssh://git@bitbucket.org:ivargrimstad/snoop.git</developerConnection>
       <tag>HEAD</tag>
    </scm>
+   
+   <profiles>
+      <profile>
+         <id>release</id>
+      </profile>
+   </profiles>
+   
 
 </project>
