@@ -27,7 +27,9 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 
 /**
@@ -105,6 +107,42 @@ public class SnoopDiscoveryClient {
                  .path(resourcePath)
                  .request()
                  .delete());
+
+      } catch (SnoopServiceUnavailableException e) {
+         LOGGER.warning(() -> "Service unavailable for " + applicationName);
+      }
+
+      return returnValue;
+   }
+   
+   public Optional<Response> simplePut(String resourcePath, Object entity) {
+      
+      Optional<Response> returnValue = Optional.empty();
+      
+      try {
+
+         returnValue = Optional.of(getServiceRoot()
+                 .path(resourcePath)
+                 .request()
+                 .put(Entity.entity(entity, APPLICATION_JSON)));
+
+      } catch (SnoopServiceUnavailableException e) {
+         LOGGER.warning(() -> "Service unavailable for " + applicationName);
+      }
+
+      return returnValue;
+   }
+
+   public Optional<Response> simplePost(String resourcePath, Object entity) {
+      
+      Optional<Response> returnValue = Optional.empty();
+      
+      try {
+
+         returnValue = Optional.of(getServiceRoot()
+                 .path(resourcePath)
+                 .request()
+                 .post(Entity.entity(entity, APPLICATION_JSON)));
 
       } catch (SnoopServiceUnavailableException e) {
          LOGGER.warning(() -> "Service unavailable for " + applicationName);
