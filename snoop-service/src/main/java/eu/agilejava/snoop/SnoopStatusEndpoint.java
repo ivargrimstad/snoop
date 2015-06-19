@@ -45,6 +45,14 @@ public class SnoopStatusEndpoint {
    @EJB
    private SnoopClientRegistry clients;
 
+   /**
+    * Heartbeat endpoint.
+    * Registers that the client is still there and updates configuration
+    * if changed.
+    * 
+    * @param clientId The client id
+    * @param applicationConfig The updated configuration
+    */
    @OnMessage
    public void onMessage(@PathParam("clientId") String clientId, String applicationConfig) {
 
