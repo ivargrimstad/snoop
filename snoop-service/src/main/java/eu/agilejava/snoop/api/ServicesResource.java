@@ -46,35 +46,25 @@ import javax.ws.rs.core.UriInfo;
  */
 @Path("services")
 public class ServicesResource {
-   
+
    @Context
    private UriInfo uriInfo;
-   
+
    @EJB
    private SnoopClientRegistry snoopClientRegistry;
-   
+
    @GET
    @Produces(APPLICATION_JSON)
    public Response all() {
       return Response.ok(snoopClientRegistry.getServiceConfigs()).build();
    }
-   
+
    @GET
    @Produces(APPLICATION_JSON)
    @Path("{serviceId}")
    public Response lookup(@PathParam("serviceId") String serviceId) {
-      
+
       return Response.ok(snoopClientRegistry.getClientConfig(serviceId)
               .orElseThrow(NotFoundException::new)).build();
    }
-   
-//   @POST
-//   @Consumes(APPLICATION_JSON)
-//   public Response register(@Valid SnoopConfig config) {
-//
-//      // TODO register client
-//      
-//      UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
-//      return Response.created(uriBuilder.segment(config.getApplicationName()).build()).build();
-//   }
 }
