@@ -23,7 +23,7 @@
  */
 package eu.agilejava.snoop.config;
 
-import eu.agilejava.snoop.SnoopLookupResource;
+import eu.agilejava.snoop.api.ServicesResource;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -40,7 +40,7 @@ public class ApplicatonConfig extends Application {
    public Set<Class<?>> getClasses() {
       
       Set<Class<?>> classes = new HashSet<>();
-      classes.add(SnoopLookupResource.class);
+      classes.add(ServicesResource.class);
       
       return classes;
    }

@@ -21,27 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop;
+package eu.agilejava.snoop.api;
 
+import eu.agilejava.snoop.SnoopClientRegistry;
+import eu.agilejava.snoop.SnoopConfig;
 import javax.ejb.EJB;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @Path("services")
-public class SnoopLookupResource {
-
+public class ServicesResource {
+   
+   @Context
+   private UriInfo uriInfo;
+   
    @EJB
    private SnoopClientRegistry snoopClientRegistry;
-
+   
    @GET
    @Produces(APPLICATION_JSON)
    public Response all() {
@@ -52,9 +63,18 @@ public class SnoopLookupResource {
    @Produces(APPLICATION_JSON)
    @Path("{serviceId}")
    public Response lookup(@PathParam("serviceId") String serviceId) {
-
+      
       return Response.ok(snoopClientRegistry.getClientConfig(serviceId)
               .orElseThrow(NotFoundException::new)).build();
    }
    
+//   @POST
+//   @Consumes(APPLICATION_JSON)
+//   public Response register(@Valid SnoopConfig config) {
+//
+//      // TODO register client
+//      
+//      UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
+//      return Response.created(uriBuilder.segment(config.getApplicationName()).build()).build();
+//   }
 }
