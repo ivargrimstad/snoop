@@ -3,7 +3,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>eu.agilejava</groupId>
    <artifactId>snoop-root</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
+   <version>1.0.0</version>
    <packaging>pom</packaging>
 
    <name>Snoop Root</name>
@@ -64,6 +64,7 @@
    <scm>
       <connection>scm:git:ssh://git@bitbucket.org:ivargrimstad/snoop.git</connection>
       <developerConnection>scm:git:ssh://git@bitbucket.org:ivargrimstad/snoop.git</developerConnection>
+      <url>git@bitbucket.org:ivargrimstad/snoop.git</url>
       <tag>HEAD</tag>
    </scm>
    
