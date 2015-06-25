@@ -52,9 +52,9 @@
 
    <distributionManagement>
       <repository>
-         <id>agilejava-releases</id>
-         <url>http://nexus.agilejava.eu/nexus/content/repositories/releases</url>
-      </repository>
+         <id>ossrh</id>
+         <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      </repository>      
       <snapshotRepository>
          <id>agilejava-snapshots</id>
          <url>http://nexus.agilejava.eu/nexus/content/repositories/snapshots</url>
@@ -67,10 +67,25 @@
       <tag>HEAD</tag>
    </scm>
    
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+               <serverId>ossrh</serverId>
+               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+               <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+   
    <profiles>
       <profile>
          <id>release</id>
-         
          <build>
             <plugins>
                <plugin>
@@ -114,10 +129,8 @@
                   </executions>
                </plugin>
             </plugins>
-         </build>
-         
+         </build>         
       </profile>
    </profiles>
-   
 
 </project>
