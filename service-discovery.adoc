@@ -1,0 +1,32 @@
+== Service Discovery
+
+. Maven
+
+ <dependency>
+    <groupId>eu.agilejava</groupId>
+    <artifactId>snoop-client</artifactId>
+    <version>1.0.0</version>
+ </dependency>
+
+. To discover a service, use the @Snoop qualifier to inject a client to the registered service.
+
+Example:
+
+ @Inject
+ @Snoop(applicationName = "snoophello")
+ private SnoopDiscoveryClient helloService;
+ ...
+    String helloResponse = helloService.simpleGet("hello")
+              .filter(r -> r.getStatus() == 200)
+              .map(r -> r.readEntity(String.class))
+              .orElse("goodbye");
+ ...
+ // or
+    try {
+       WebTarget endpoint = helloService.getServiceRoot();
+       ...
+    } catch(SnoopServiceUnavailableException e) {
+    ...
+    } 
+...
+

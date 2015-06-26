@@ -1,0 +1,31 @@
+== Service Registration
+
+. Start the Snoop Service
+
+ docker run -it -p 8081:8080 ivargrimstad/snoop-service
+
+. To enable logging (optional)
+
+ docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
+ docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
+
+. Maven
+
+ <dependency>
+    <groupId>eu.agilejava</groupId>
+    <artifactId>snoop</artifactId>
+    <version>1.0.0</version>
+ </dependency>
+
+. Configure the service by editing the application.yml file
+
+. To register a service with snoop, all you need to do is annotate a class in the service with @EnableSnoopClient.
+
+Example:
+
+ @EnableSnoopClient
+ @ApplicationPath("api")
+ public class ApplicationConfig extends Application {
+    ...
+ }
+
