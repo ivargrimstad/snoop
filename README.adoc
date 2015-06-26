@@ -2,66 +2,22 @@
 
 Snoop is an experimental registration and discovery service for Java EE based microservices.
 
-== Service Registration
+== Getting Started
 
-. Start the Snoop Service
+. link:service-registration.adoc[Service Registration]
+. link:service-discovery.adoc[Service Discovery]
 
- docker run -it -p 8081:8080 ivargrimstad/snoop-service
+== Maven
 
-. To enable logging (optional)
-
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
-
-. Maven
-
- <dependency>
-    <groupId>eu.agilejava</groupId>
-    <artifactId>snoop</artifactId>
-    <version>1.0.0</version>
- </dependency>
-
-. Configure the service by editing the application.yml file
-
-. To register a service with snoop, all you need to do is annotate a class in the service with @EnableSnoopClient.
-
-Example:
-
- @EnableSnoopClient
- @ApplicationPath("api")
- public class ApplicationConfig extends Application {
-    ...
- }
-
-== Service Discovery
-
-. Maven
-
- <dependency>
-    <groupId>eu.agilejava</groupId>
-    <artifactId>snoop-client</artifactId>
-    <version>1.0.0</version>
- </dependency>
-
-. To discover a service, use the @Snoop qualifier to inject a client to the registered service.
-
-Example:
-
- @Inject
- @Snoop(applicationName = "snoophello")
- private SnoopDiscoveryClient helloService;
- ...
-    String helloResponse = helloService.simpleGet("hello")
-              .filter(r -> r.getStatus() == 200)
-              .map(r -> r.readEntity(String.class))
-              .orElse("goodbye");
- ...
- // or
-    try {
-       WebTarget endpoint = helloService.getServiceRoot();
-       ...
-    } catch(SnoopServiceUnavailableException e) {
-    ...
-    } 
-...
-
+. Released artifacts are available in link:http://search.maven.org/#search%7Cga%7C1%7Csnoop[Maven Central]
+. Snapshots:
+ 
+ <repositories>
+    <repository>
+    <id>agilejava-snapshots</id>
+    <url>http://nexus.agilejava.eu/content/groups/public</url>
+    <snapshots>
+       <enabled>true</enabled>
+       </snapshots>
+    </repository>
+ </repositories>
