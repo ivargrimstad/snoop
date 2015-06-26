@@ -16,8 +16,8 @@
 
    <repositories>
       <repository>
-         <id>snoop</id>
-         <url>http://nexus.agilejava.eu/nexus/content/groups/public</url>
+         <id>agilejava-snapshots</id>
+         <url>http://nexus.agilejava.eu/content/groups/public</url>
          <snapshots>
             <enabled>true</enabled>
          </snapshots>
