@@ -1,6 +1,6 @@
 == Service Discovery
 
-. Maven
+. Maven Dependency
 
  <dependency>
     <groupId>eu.agilejava</groupId>

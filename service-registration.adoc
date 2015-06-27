@@ -1,15 +1,6 @@
 == Service Registration
 
-. Start the Snoop Service
-
- docker run -it -p 8081:8080 ivargrimstad/snoop-service
-
-. To enable logging (optional)
-
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
-
-. Maven
+. Maven Dependency
 
  <dependency>
     <groupId>eu.agilejava</groupId>

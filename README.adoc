@@ -4,6 +4,7 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
 == Getting Started
 
+. Start the link:snoop-service.adoc[Snoop Service]
 . link:service-registration.adoc[Service Registration]
 . link:service-discovery.adoc[Service Discovery]
 
