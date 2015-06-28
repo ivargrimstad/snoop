@@ -22,3 +22,8 @@ Snoop is an experimental registration and discovery service for Java EE based mi
        </snapshots>
     </repository>
  </repositories>
+
+== Examples
+
+See link:https://github.com/arun-gupta/microservices[https://github.com/arun-gupta/microservices] for an example 
+of how to use Snoop.
