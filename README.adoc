@@ -15,10 +15,10 @@ Snoop is an experimental registration and discovery service for Java EE based mi
  
  <repositories>
     <repository>
-    <id>agilejava-snapshots</id>
-    <url>http://nexus.agilejava.eu/content/groups/public</url>
-    <snapshots>
-       <enabled>true</enabled>
+       <id>agilejava-snapshots</id>
+       <url>http://nexus.agilejava.eu/content/groups/public</url>
+       <snapshots>
+          <enabled>true</enabled>
        </snapshots>
     </repository>
  </repositories>
