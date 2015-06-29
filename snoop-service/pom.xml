@@ -44,7 +44,7 @@
                      <images>
                         <image>
                            <alias>user</alias>
-                           <name>ivargrimstad/snoop-service</name>
+                           <name>ivargrimstad/snoop-service:${project.version}</name>
                            <build>
                               <from>ivargrimstad/ubuntu-wildfly</from>
                               <assembly>
