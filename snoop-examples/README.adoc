@@ -11,7 +11,7 @@ Snoop is an experimental registration and discovery service for Java EE based mi
  docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
  docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
 
-. Start the example applcations
+. Start the example applications
 
 .. snoop-hello
 
