@@ -1,1 +1,3 @@
 = Snoop Eureka Client
+
+This is work in progress, but will eventually provide the same API for discovering clients from Eureka as the snoop-client does for Snoop.
