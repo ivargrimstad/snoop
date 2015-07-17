@@ -165,11 +165,11 @@ public class SnoopDiscoveryClient {
          if (response.getStatus() == 200) {
             return response.readEntity(SnoopConfig.class);
          } else {
-            throw new SnoopServiceUnavailableException();
+            throw new SnoopServiceUnavailableException("Response from \"" + serviceUrl + "\"=" + response.getStatus());
          }
 
       } catch (ProcessingException e) {
-         throw new SnoopServiceUnavailableException();
+         throw new SnoopServiceUnavailableException(e);
       }
    }
 }
