@@ -31,5 +31,23 @@ import javax.ejb.ApplicationException;
  */
 @ApplicationException
 public class SnoopServiceUnavailableException extends RuntimeException{
-   
+
+    public SnoopServiceUnavailableException() {
+    }
+
+    public SnoopServiceUnavailableException(String message) {
+        super(message);
+    }
+
+    public SnoopServiceUnavailableException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public SnoopServiceUnavailableException(Throwable cause) {
+        super(cause);
+    }
+
+    public SnoopServiceUnavailableException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }
