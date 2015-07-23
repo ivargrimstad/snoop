@@ -21,31 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package eu.agilejava.snoop.annotation;
+package eu.agilejava.snoop;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Stereotype;
-import javax.enterprise.util.Nonbinding;
+import javax.ejb.ApplicationException;
 
 /**
- * Annotation for enabling application as Snoop client.
- * Use this annotation to register the application (service) with Snoop.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@Stereotype
-@Retention(RUNTIME)
-@Documented
-@ApplicationScoped
-@Target(TYPE)
-public @interface EnableSnoopClient {
-   
-   @Nonbinding
-   String name();
+@ApplicationException
+public class SnoopConfigurationException extends RuntimeException {
+
+   public SnoopConfigurationException() {
+   }
+
+   public SnoopConfigurationException(String message) {
+      super(message);
+   }
+
+   public SnoopConfigurationException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+   public SnoopConfigurationException(Throwable cause) {
+      super(cause);
+   }
+
+   public SnoopConfigurationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+      super(message, cause, enableSuppression, writableStackTrace);
+   }
 }

@@ -60,7 +60,7 @@ public class SnoopScannerExtension implements Extension {
 
       LOGGER.config(() -> "Found @EnableSnoopClient annotated class: " + pat.getAnnotatedType().getJavaClass().getName());
       snoopEnabled = true;
-      applicationName = pat.getAnnotatedType().getAnnotation(EnableSnoopClient.class).applicationName();
+      applicationName = pat.getAnnotatedType().getAnnotation(EnableSnoopClient.class).name();
       LOGGER.config(() -> "Snoop Application name is: " + applicationName);
    }
 }

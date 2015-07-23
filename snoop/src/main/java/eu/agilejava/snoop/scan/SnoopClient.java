@@ -24,6 +24,7 @@
 package eu.agilejava.snoop.scan;
 
 import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import eu.agilejava.snoop.SnoopConfigurationException;
 import eu.agilejava.snoop.client.SnoopConfig;
 import java.io.IOException;
 import java.net.URI;
@@ -75,14 +76,14 @@ public class SnoopClient {
 
       if (SnoopExtensionHelper.isSnoopEnabled()) {
 
-         readProperties();
+         try {
+            readConfiguration();
 
-         if (applicationConfig.getApplicationName() != null) {
             LOGGER.config(() -> "Registering " + applicationConfig.getApplicationName());
             register(applicationConfig.getApplicationName());
-         } else {
-            LOGGER.config(() -> "Registering with name from annotation: " + SnoopExtensionHelper.getApplicationName());
-            register(SnoopExtensionHelper.getApplicationName());
+
+         } catch (SnoopConfigurationException e) {
+            LOGGER.severe(() -> "Snoop is enabled but not configured properly: " + e.getMessage());
          }
 
       } else {
@@ -157,16 +158,33 @@ public class SnoopClient {
       sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), null);
    }
 
-   private void readProperties() {
+   private void readConfiguration() throws SnoopConfigurationException {
+
       Yaml yaml = new Yaml();
       Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
 
-      Map<String, String> snoopConfig = (Map<String, String>) props.get("snoop");
+      Map<String, Object> snoopConfig = (Map<String, Object>) props.get("snoop");
 
-      applicationConfig.setApplicationName(snoopConfig.get("applicationName"));
-      applicationConfig.setApplicationHome(snoopConfig.get("applicationHome"));
-      applicationConfig.setApplicationServiceRoot(snoopConfig.get("applicationServiceRoot"));
+      applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
 
+      String host = System.getenv(applicationConfig.getApplicationName() + ".host");
+      String port = System.getenv(applicationConfig.getApplicationName() + ".port");
+
+      String applicationHome;
+      if (host != null && port != null) {
+         applicationHome = host + ":" + port;
+      } else {
+         applicationHome = snoopConfig.get("host") + ":" + snoopConfig.get("port");
+      }
+      applicationConfig.setApplicationHome(applicationHome);
+
+      String serviceRoot = System.getenv(applicationConfig.getApplicationName() + ".serviceRoot");
+      if (serviceRoot != null) {
+         applicationConfig.setApplicationServiceRoot(serviceRoot);
+      } else {
+         applicationConfig.setApplicationServiceRoot((String) snoopConfig.get("serviceRoot"));
+      }
+      
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
       serviceUrl = "ws://" + (snoopConfig.get("serviceHost") != null ? snoopConfig.get("serviceHost") : DEFAULT_SERVICE_HOST);
