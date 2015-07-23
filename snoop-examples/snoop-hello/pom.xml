@@ -37,4 +37,62 @@
       </dependency>
 
    </dependencies>
+   
+      <profiles>
+      <profile>
+         <id>docker</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.jolokia</groupId>
+                  <artifactId>docker-maven-plugin</artifactId>
+                  <version>0.11.5</version>
+                  <configuration>
+                     <images>
+                        <image>
+                           <alias>user</alias>
+                           <name>ivargrimstad/snoop-hello:${project.version}</name>
+                           <build>
+                              <from>ivargrimstad/ubuntu-wildfly</from>
+                              <assembly>
+                                 <descriptor>assembly.xml</descriptor>
+                                 <basedir>/</basedir>
+                              </assembly>
+                              <ports>
+                                 <port>8080</port>
+                              </ports>
+                           </build>
+                                    
+                           <run>
+                              <ports>
+                                 <port>8080:8080</port>
+                              </ports>
+                           </run>
+                        </image>
+                     </images>
+                  </configuration>
+                        
+                  <executions>
+                     <execution>
+                        <id>docker:build</id>
+                        <phase>package</phase>
+                        <goals>
+                           <goal>build</goal>
+                        </goals>
+                     </execution>
+                     <!--                     <execution>-->
+                     <!--                        <id>docker:start</id>-->
+                     <!--                        <phase>install</phase>-->
+                     <!--                        <goals>-->
+                     <!--                           <goal>start</goal>-->
+                     <!--                        </goals>-->
+                     <!--                     </execution>-->
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+   </profiles>
+
+   
 </project>

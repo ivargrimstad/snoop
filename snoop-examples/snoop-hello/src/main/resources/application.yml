@@ -1,7 +1,8 @@
 snoop:
-   applicationName: snoophello
-   applicationHome: http://localhost:8080/snoop-hello-service
-   applicationServiceRoot: api
+   host: http://localhost
+   port: 8080
+   serviceRoot: snoop-hello-service/api
+   
 #   serviceHost: localhost:8080/snoop-service/
    serviceHost: 192.168.59.103:8081/snoop-service/
 

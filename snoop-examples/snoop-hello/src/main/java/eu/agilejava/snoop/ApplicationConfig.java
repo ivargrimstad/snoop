@@ -33,9 +33,7 @@ import javax.ws.rs.core.Application;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-@EnableSnoopClient
-//@EnableSnoopClient(applicationName = "hellosnoop")
-//@EnableEurekaClient(applicationName = "helloeureka")
+@EnableSnoopClient(name = "snoophello")
 @ApplicationPath("api")
 public class ApplicationConfig extends Application {
 
