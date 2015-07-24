@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Calendar;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -166,27 +167,28 @@ public class SnoopClient {
       Map<String, Object> snoopConfig = (Map<String, Object>) props.get("snoop");
 
       applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
+      final String host = readProperty("host", snoopConfig);
+      final String port = readProperty("port", snoopConfig);
+      applicationConfig.setApplicationHome(host + ":" + port);
+      applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
 
-      String host = System.getenv(applicationConfig.getApplicationName() + ".host");
-      String port = System.getenv(applicationConfig.getApplicationName() + ".port");
-
-      String applicationHome;
-      if (host != null && port != null) {
-         applicationHome = host + ":" + port;
-      } else {
-         applicationHome = snoopConfig.get("host") + ":" + snoopConfig.get("port");
-      }
-      applicationConfig.setApplicationHome(applicationHome);
-
-      String serviceRoot = System.getenv(applicationConfig.getApplicationName() + ".serviceRoot");
-      if (serviceRoot != null) {
-         applicationConfig.setApplicationServiceRoot(serviceRoot);
-      } else {
-         applicationConfig.setApplicationServiceRoot((String) snoopConfig.get("serviceRoot"));
-      }
-      
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
-      serviceUrl = "ws://" + (snoopConfig.get("serviceHost") != null ? snoopConfig.get("serviceHost") : DEFAULT_SERVICE_HOST);
+      serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
+   }
+
+   private String readProperty(final String key, Map<String, Object> snoopConfig) {
+
+      String property = Optional.ofNullable(System.getenv(applicationConfig.getApplicationName() + "." + key))
+              .orElseGet(() -> {
+                 String p = Optional.ofNullable(snoopConfig.get(key))
+                 .orElseThrow(() -> {
+                    return new SnoopConfigurationException(key + " must be configured either in application.yml or as env parameter");
+                 })
+                 .toString();
+                 return p;
+              });
+
+      return property;
    }
 }
