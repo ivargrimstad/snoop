@@ -24,6 +24,7 @@
 package eu.agilejava.snoop.scan;
 
 import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.error.YAMLException;
 import eu.agilejava.snoop.SnoopConfigurationException;
 import eu.agilejava.snoop.client.SnoopConfig;
 import java.io.IOException;
@@ -161,20 +162,25 @@ public class SnoopClient {
 
    private void readConfiguration() throws SnoopConfigurationException {
 
-      Yaml yaml = new Yaml();
-      Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
+      try {
+         Yaml yaml = new Yaml();
+         Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
 
-      Map<String, Object> snoopConfig = (Map<String, Object>) props.get("snoop");
+         Map<String, Object> snoopConfig = (Map<String, Object>) props.get("snoop");
 
-      applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
-      final String host = readProperty("host", snoopConfig);
-      final String port = readProperty("port", snoopConfig);
-      applicationConfig.setApplicationHome(host + ":" + port);
-      applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
+         applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
+         final String host = readProperty("host", snoopConfig);
+         final String port = readProperty("port", snoopConfig);
+         applicationConfig.setApplicationHome(host + ":" + port);
+         applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
 
-      LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
+         LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
-      serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
+         serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
+
+      } catch (YAMLException e) {
+         throw new SnoopConfigurationException(e);
+      }
    }
 
    private String readProperty(final String key, Map<String, Object> snoopConfig) {
