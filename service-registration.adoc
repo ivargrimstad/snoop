@@ -5,18 +5,26 @@
  <dependency>
     <groupId>eu.agilejava</groupId>
     <artifactId>snoop</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
  </dependency>
 
-. Configure the service by editing the application.yml file
+. Enable Snoop
 
-. To register a service with snoop, all you need to do is annotate a class in the service with @EnableSnoopClient.
-
-Example:
-
- @EnableSnoopClient
+ @EnableSnoopClient(name="myservice")
  @ApplicationPath("api")
  public class ApplicationConfig extends Application {
-    ...
+   ...
  }
 
+. Configure the service
+.. Use `application.yml`
+
+ snoop:
+   host: http://localhost
+   port: 8080
+   serviceRoot: snoop-hello-service/api
+   serviceHost: 192.168.59.103:8081/snoop-service/
+
+.. Or by environment variables (remember prefix with service name)
+
+ docker run -it -p 8080:8080 -e "snoophello.host=http://192.168.59.103" -e "snoophello.port=8080" -e "snoophello.serviceRoot=snoop-hello-service/api" -e "snoophello.serviceHost=192.168.59.103:8081/snoop-service/" ivargrimstad/snoop-hello:1.0.0-SNAPSHOT

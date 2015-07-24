@@ -5,8 +5,13 @@
  <dependency>
     <groupId>eu.agilejava</groupId>
     <artifactId>snoop-client</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
  </dependency>
+
+. Configure using `application.yml`
+
+ snoop:
+   serviceHost: 192.168.59.103:8081/snoop-service/
 
 . To discover a service, use the @Snoop qualifier to inject a client to the registered service.
 
@@ -27,6 +32,5 @@ Example:
        ...
     } catch(SnoopServiceUnavailableException e) {
     ...
-    } 
+    }
 ...
-
