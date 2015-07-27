@@ -24,8 +24,12 @@
 package eu.agilejava.snoop.client;
 
 import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.error.YAMLException;
+import eu.agilejava.snoop.SnoopConfigurationException;
 import eu.agilejava.snoop.annotation.Snoop;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -62,15 +66,38 @@ public class SnoopProducer {
    @PostConstruct
    private void init() {
 
-      Yaml yaml = new Yaml();
-      Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
+      Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
+      try {
+         Yaml yaml = new Yaml();
+         Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
 
-      Map<String, String> snoopConfig = (Map<String, String>) props.get("snoop");
+         snoopConfig = (Map<String, Object>) props.get("snoop");
 
-      serviceUrl = "http://" + (snoopConfig.get("serviceHost") != null ? snoopConfig.get("serviceHost") : DEFAULT_BASE_HOST);
+      } catch (YAMLException e) {
+         LOGGER.config(() -> "No configuration file. Using env properties.");
+      }
+
+      serviceUrl = "http://" + readProperty("serviceHost", snoopConfig);
 
       LOGGER.config(() -> "Service URL: " + serviceUrl);
-
    }
 
+   private String readProperty(final String key, Map<String, Object> snoopConfig) {
+
+      String property = Optional.ofNullable(System.getProperty(key))
+              .orElseGet(() -> {
+                 String envProp = Optional.ofNullable(System.getenv(key))
+                 .orElseGet(() -> {
+                    String confProp = Optional.ofNullable(snoopConfig.get(key))
+                    .orElseThrow(() -> {
+                       return new SnoopConfigurationException(key + " must be configured either in application.yml or as env or system property");
+                    })
+                    .toString();
+                    return confProp;
+                 });
+                 return envProp;
+              });
+
+      return property;
+   }
 }

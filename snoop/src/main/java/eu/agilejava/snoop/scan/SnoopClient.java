@@ -30,6 +30,7 @@ import eu.agilejava.snoop.client.SnoopConfig;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -162,25 +163,26 @@ public class SnoopClient {
 
    private void readConfiguration() throws SnoopConfigurationException {
 
+      Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
       try {
          Yaml yaml = new Yaml();
          Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
 
-         Map<String, Object> snoopConfig = (Map<String, Object>) props.get("snoop");
-
-         applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
-         final String host = readProperty("host", snoopConfig);
-         final String port = readProperty("port", snoopConfig);
-         applicationConfig.setApplicationHome(host + ":" + port);
-         applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
-
-         LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
-
-         serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
+         snoopConfig = (Map<String, Object>) props.get("snoop");
 
       } catch (YAMLException e) {
-         throw new SnoopConfigurationException(e);
+         LOGGER.config(() -> "No configuration file. Using env properties.");
       }
+
+      applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
+      final String host = readProperty("host", snoopConfig);
+      final String port = readProperty("port", snoopConfig);
+      applicationConfig.setApplicationHome(host + ":" + port);
+      applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
+
+      LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
+
+      serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
    }
 
    private String readProperty(final String key, Map<String, Object> snoopConfig) {
