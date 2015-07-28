@@ -39,21 +39,23 @@
                <plugin>
                   <groupId>org.jolokia</groupId>
                   <artifactId>docker-maven-plugin</artifactId>
-                  <version>0.11.5</version>
+                  <version>0.13.2</version>
                   <configuration>
                      <images>
                         <image>
-                           <alias>user</alias>
+                           <alias>snoop-service</alias>
                            <name>ivargrimstad/snoop-service:${project.version}</name>
                            <build>
-                              <from>ivargrimstad/ubuntu-wildfly</from>
+                              <from>jboss/wildfly</from>
+                              <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
                               <assembly>
                                  <descriptor>assembly.xml</descriptor>
                                  <basedir>/</basedir>
+                                 <ignorePermissions>true</ignorePermissions>
                               </assembly>
-                              <ports>
-                                 <port>8080</port>
-                              </ports>
+                              <cmd>
+                                 <shell>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</shell>
+                              </cmd>
                            </build>
                                     
                            <run>
