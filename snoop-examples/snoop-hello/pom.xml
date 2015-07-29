@@ -38,61 +38,39 @@
 
    </dependencies>
    
-      <profiles>
-      <profile>
-         <id>docker</id>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.jolokia</groupId>
-                  <artifactId>docker-maven-plugin</artifactId>
-                  <version>0.11.5</version>
-                  <configuration>
-                     <images>
-                        <image>
-                           <alias>user</alias>
-                           <name>ivargrimstad/snoop-hello:${project.version}</name>
-                           <build>
-                              <from>ivargrimstad/ubuntu-wildfly</from>
-                              <assembly>
-                                 <descriptor>assembly.xml</descriptor>
-                                 <basedir>/</basedir>
-                              </assembly>
-                              <ports>
-                                 <port>8080</port>
-                              </ports>
-                           </build>
-                                    
-                           <run>
-                              <ports>
-                                 <port>8080:8080</port>
-                              </ports>
-                           </run>
-                        </image>
-                     </images>
-                  </configuration>
-                        
-                  <executions>
-                     <execution>
-                        <id>docker:build</id>
-                        <phase>package</phase>
-                        <goals>
-                           <goal>build</goal>
-                        </goals>
-                     </execution>
-                     <!--                     <execution>-->
-                     <!--                        <id>docker:start</id>-->
-                     <!--                        <phase>install</phase>-->
-                     <!--                        <goals>-->
-                     <!--                           <goal>start</goal>-->
-                     <!--                        </goals>-->
-                     <!--                     </execution>-->
-                  </executions>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
-   </profiles>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.2.11</version>
+            <configuration>
+               <imageName>ivargrimstad/snoop-hello:${project.version}</imageName>
+               <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
+               <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
+               <resources>
+                  <resource>
+                     <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>
+                     <directory>${basedir}/src/main/wildfly</directory>
+                     <include>standalone-snoop.xml</include>
+                  </resource>
+                  <resource>
+                     <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>
+                     <directory>${basedir}/target</directory>
+                     <include>${project.build.finalName}.war</include>
+                  </resource>
+               </resources>   
+               <env>
+                  <hello.host>192.168.59.103</hello.host>
+                  <hello.port>8091</hello.port>
+                  <hello.serviceRoot>snoop-hello-service/api</hello.serviceRoot>
+                  <hello.serviceHost>192.168.59.103:8081/snoop-service/</hello.serviceHost>            
+               </env>
+               <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 
    
 </project>
