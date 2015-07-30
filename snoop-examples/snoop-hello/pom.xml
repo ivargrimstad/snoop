@@ -33,7 +33,7 @@
       <dependency>
          <groupId>eu.agilejava</groupId>
          <artifactId>snoop</artifactId>
-         <version>1.1.0-SNAPSHOT</version>
+         <version>1.2.0-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
@@ -45,7 +45,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.2.11</version>
             <configuration>
-               <imageName>ivargrimstad/snoop-hello:${project.version}</imageName>
+               <imageName>ivargrimstad/${project.artifactId}</imageName>
                <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
                <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
                <resources>
@@ -56,7 +56,7 @@
                   </resource>
                   <resource>
                      <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>
-                     <directory>${basedir}/target</directory>
+                     <directory>${project.build.directory}</directory>
                      <include>${project.build.finalName}.war</include>
                   </resource>
                </resources>   

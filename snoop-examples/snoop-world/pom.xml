@@ -33,8 +33,42 @@
       <dependency>
          <groupId>eu.agilejava</groupId>
          <artifactId>snoop</artifactId>
-         <version>1.1.0-SNAPSHOT</version>
+         <version>1.2.0-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
+   
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.2.11</version>
+            <configuration>
+               <imageName>ivargrimstad/${project.artifactId}</imageName>
+               <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
+               <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
+               <resources>
+                  <resource>
+                     <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>
+                     <directory>${basedir}/src/main/wildfly</directory>
+                     <include>standalone-snoop.xml</include>
+                  </resource>
+                  <resource>
+                     <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>
+                     <directory>${project.build.directory}</directory>
+                     <include>${project.build.finalName}.war</include>
+                  </resource>
+               </resources>   
+               <env>
+                  <world.host>192.168.59.103</world.host>
+                  <world.port>8092</world.port>
+                  <world.serviceRoot>snoop-world-service/api</world.serviceRoot>
+                  <world.serviceHost>192.168.59.103:8081/snoop-service/</world.serviceHost>            
+               </env>
+               <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 </project>
