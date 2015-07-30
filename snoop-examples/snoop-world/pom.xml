@@ -45,6 +45,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.2.11</version>
             <configuration>
+               <serverId>docker-hub</serverId>
                <imageName>ivargrimstad/${project.artifactId}</imageName>
                <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
                <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
