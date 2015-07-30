@@ -38,7 +38,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.2.11</version>
             <configuration>
-               <imageName>ivargrimstad/snoop-service:${project.version}</imageName>
+               <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>
                <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
                <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
                <resources>
