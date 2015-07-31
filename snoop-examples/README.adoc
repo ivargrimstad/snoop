@@ -6,15 +6,18 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
  docker run -it -p 8081:8080 ivargrimstad/snoop-service
 
-. To enable logging (optional)
-
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect “/subsystem=logging/console-handler=CONSOLE:change-log-level(level="CONFIG”)“
- docker exec CONTAINER_ID /opt/jboss/wildfly/bin/jboss-cli.sh –connect ”/subsystem=logging/logger=eu.agilejava.snoop:add(level=CONFIG)
-
 . Start the example applications (in same or different containers)
 
 .. snoop-hello
 
+For convenience available as docker image:
+
+ docker run -it -p 8091:8080 ivargrimstad/snoop-hello
+
 .. snoop-world
+
+For convenience avilable as docker image:
+
+ docker run -it -p 8092:8080 ivargrimstad/snoop-world
 
 .. snoop-helloworld
