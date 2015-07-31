@@ -8,16 +8,16 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
 . Start the example applications (in same or different containers)
 
-.. snoop-hello
+*snoop-hello*
 
 For convenience available as docker image:
 
  docker run -it -p 8091:8080 ivargrimstad/snoop-hello
 
-.. snoop-world
+*snoop-world*
 
 For convenience avilable as docker image:
 
  docker run -it -p 8092:8080 ivargrimstad/snoop-world
 
-.. snoop-helloworld
+*snoop-helloworld*
