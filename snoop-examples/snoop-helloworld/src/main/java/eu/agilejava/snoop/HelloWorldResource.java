@@ -41,11 +41,11 @@ public class HelloWorldResource {
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
    @Inject
-   @Snoop(applicationName = "snoophello")
+   @Snoop(applicationName = "hello")
    private SnoopDiscoveryClient helloService;
 
    @Inject
-   @Snoop(applicationName = "snoopworld")
+   @Snoop(applicationName = "world")
    private SnoopDiscoveryClient worldService;
 
    @GET

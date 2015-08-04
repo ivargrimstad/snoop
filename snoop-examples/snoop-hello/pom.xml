@@ -33,7 +33,7 @@
       <dependency>
          <groupId>eu.agilejava</groupId>
          <artifactId>snoop</artifactId>
-         <version>1.2.0-SNAPSHOT</version>
+         <version>1.3.0-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
@@ -62,7 +62,7 @@
                   </resource>
                </resources>   
                <env>
-                  <hello.host>192.168.59.103</hello.host>
+                  <hello.host>http://192.168.59.103</hello.host>
                   <hello.port>8091</hello.port>
                   <hello.serviceRoot>snoop-hello-service/api</hello.serviceRoot>
                   <hello.serviceHost>192.168.59.103:8081/snoop-service/</hello.serviceHost>            

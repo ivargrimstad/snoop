@@ -33,7 +33,7 @@
       <dependency>
          <groupId>eu.agilejava</groupId>
          <artifactId>snoop</artifactId>
-         <version>1.2.0-SNAPSHOT</version>
+         <version>1.3.0-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
@@ -62,7 +62,7 @@
                   </resource>
                </resources>   
                <env>
-                  <world.host>192.168.59.103</world.host>
+                  <world.host>http://192.168.59.103</world.host>
                   <world.port>8092</world.port>
                   <world.serviceRoot>snoop-world-service/api</world.serviceRoot>
                   <world.serviceHost>192.168.59.103:8081/snoop-service/</world.serviceHost>            

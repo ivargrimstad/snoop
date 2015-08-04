@@ -177,7 +177,7 @@ public class SnoopClient {
       applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
       final String host = readProperty("host", snoopConfig);
       final String port = readProperty("port", snoopConfig);
-      applicationConfig.setApplicationHome(host + ":" + port);
+      applicationConfig.setApplicationHome(host + ":" + port + "/");
       applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
 
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
