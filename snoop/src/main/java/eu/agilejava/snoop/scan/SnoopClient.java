@@ -62,7 +62,6 @@ import javax.websocket.WebSocketContainer;
 public class SnoopClient {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
-   private static final String DEFAULT_SERVICE_HOST = "localhost:8080/snoop-service/";
    private static final String REGISTER_ENDPOINT = "snoop";
    private static final String STATUS_ENDPOINT = "snoopstatus/";
 
