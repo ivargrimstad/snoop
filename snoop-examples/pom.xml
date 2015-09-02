@@ -11,6 +11,7 @@
    <modules>
       <module>snoop-hello</module>
       <module>snoop-world</module>
+      <module>snoop-swarm</module>
       <module>snoop-helloworld</module>
    </modules>
 

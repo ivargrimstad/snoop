@@ -1,0 +1,13 @@
+snoop:
+   host: http://localhost
+   port: 8080
+   serviceRoot: snoop-swarm/api
+   
+#   serviceHost: localhost:8080/snoop-service/
+   serviceHost: 192.168.59.103:8081/snoop-service/
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  
