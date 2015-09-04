@@ -20,4 +20,10 @@ For convenience avilable as docker image:
 
  docker run -it -p 8092:8080 ivargrimstad/snoop-world
 
+*snoop-swarm*
+
+Packaged as Wildfly Swarm JAR
+
+ java -jar target/snoop-hello-swarm-1.0.0-SNAPSHOT-swarm.jar
+
 *snoop-helloworld*
