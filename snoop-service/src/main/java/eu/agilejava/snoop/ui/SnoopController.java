@@ -24,6 +24,8 @@
 package eu.agilejava.snoop.ui;
 
 import eu.agilejava.snoop.SnoopClientRegistry;
+import eu.agilejava.snoop.SnoopConfig;
+import java.util.Collection;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -46,5 +48,9 @@ public class SnoopController {
 
    public Set<String> getClients() {
       return clients.getClients();
+   }
+   
+   public Collection<SnoopConfig> getClientConfigurations() {
+      return clients.getServiceConfigs();
    }
 }
