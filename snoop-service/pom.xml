@@ -40,24 +40,48 @@
             <configuration>
                <serverId>docker-hub</serverId>
                <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>
-               <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
+               <baseImage>glassfish/nightly:latest</baseImage>
                <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
                <resources>
                   <resource>
-                     <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>
-                     <directory>${basedir}/src/main/wildfly</directory>
-                     <include>standalone-snoop.xml</include>
+                     <targetPath>/glassfish4/glassfish/domains/domain1/config/</targetPath>
+                     <directory>${basedir}/src/main/glassfish</directory>
+                     <include>logging.properties</include>
                   </resource>
                   <resource>
-                     <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>
+                     <targetPath>/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
                      <directory>${basedir}/target</directory>
                      <include>${project.build.finalName}.war</include>
                   </resource>
                </resources>                     
-               <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>
+               <entryPoint>["asadmin", "start-domain", "-v"]</entryPoint>
             </configuration>
          </plugin>
+
+         <!--         <plugin>-->
+         <!--            <groupId>com.spotify</groupId>-->
+         <!--            <artifactId>docker-maven-plugin</artifactId>-->
+         <!--            <version>0.2.11</version>-->
+         <!--            <configuration>-->
+         <!--               <serverId>docker-hub</serverId>-->
+         <!--               <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>-->
+         <!--               <baseImage>jboss/wildfly:9.0.1.Final</baseImage>-->
+         <!--               <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>-->
+         <!--               <resources>-->
+         <!--                  <resource>-->
+         <!--                     <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>-->
+         <!--                     <directory>${basedir}/src/main/wildfly</directory>-->
+         <!--                     <include>standalone-snoop.xml</include>-->
+         <!--                  </resource>-->
+         <!--                  <resource>-->
+         <!--                     <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>-->
+         <!--                     <directory>${basedir}/target</directory>-->
+         <!--                     <include>${project.build.finalName}.war</include>-->
+         <!--                  </resource>-->
+         <!--               </resources>                     -->
+         <!--               <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>-->
+         <!--            </configuration>-->
+         <!--         </plugin>-->
       </plugins>
    </build>
-
 </project>
