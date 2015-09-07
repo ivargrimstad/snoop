@@ -2,33 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-   
-   <h:head>
-      <title>Snoop</title>
-   </h:head>
-   
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
    <h:body>
-      
-      <h1>Registered Clients</h1>
-      
-      <h:dataTable value="${snoopController.clientConfigurations}" var="client">
 
-         <h:column>
-            <f:facet name="header">
-               <h:outputText value="Application Name"/>
-            </f:facet>
-            <h:outputText value="#{client.applicationName}"/>
-         </h:column>
+      <ui:composition template="./WEB-INF/template.xhtml">
 
-         <h:column>
-            <f:facet name="header">
-               <h:outputText value="Application Home"/>
-            </f:facet>
-            <h:outputText value="#{client.applicationHome}"/>
-         </h:column>
+         <ui:define name="content">
 
-      </h:dataTable>
+            <h2>Registered Clients</h2>
+
+            <h:dataTable value="${snoopController.clientConfigurations}" var="client">
+
+               <h:column>
+                  <f:facet name="header">
+                     <h:outputText value="Application Name"/>
+                  </f:facet>
+                  <h:outputText value="#{client.applicationName}"/>
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">
+                     <h:outputText value="Application Home"/>
+                  </f:facet>
+                  <h:outputText value="#{client.applicationHome}"/>
+               </h:column>
+
+            </h:dataTable>
+
+         </ui:define>
+
+      </ui:composition>
 
    </h:body>
 </html>
