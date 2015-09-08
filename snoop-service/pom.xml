@@ -40,16 +40,16 @@
             <configuration>
                <serverId>docker-hub</serverId>
                <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>
-               <baseImage>glassfish/nightly:latest</baseImage>
+               <baseImage>glassfish:4.1-jdk8</baseImage>
                <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
                <resources>
                   <resource>
-                     <targetPath>/glassfish4/glassfish/domains/domain1/config/</targetPath>
+                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/config/</targetPath>
                      <directory>${basedir}/src/main/glassfish</directory>
                      <include>logging.properties</include>
                   </resource>
                   <resource>
-                     <targetPath>/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
+                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
                      <directory>${basedir}/target</directory>
                      <include>${project.build.finalName}.war</include>
                   </resource>
