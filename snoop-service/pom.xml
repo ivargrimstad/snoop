@@ -54,7 +54,7 @@
                      <include>${project.build.finalName}.war</include>
                   </resource>
                </resources>                     
-               <entryPoint>["asadmin", "start-domain", "-v"]</entryPoint>
+               <entryPoint>["asadmin", "start-domain", "--verbose"]</entryPoint>
             </configuration>
          </plugin>
 
