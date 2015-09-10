@@ -49,6 +49,11 @@
                      <include>logging.properties</include>
                   </resource>
                   <resource>
+                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/lib/ext/</targetPath>
+                     <directory>${basedir}/src/main/glassfish</directory>
+                     <include>custom-logger-0.4.jar</include>
+                  </resource>
+                  <resource>
                      <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
                      <directory>${basedir}/target</directory>
                      <include>${project.build.finalName}.war</include>
