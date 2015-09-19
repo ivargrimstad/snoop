@@ -24,12 +24,16 @@
 package eu.agilejava.snoop.api;
 
 import eu.agilejava.snoop.SnoopClientRegistry;
+import eu.agilejava.snoop.SnoopConfig;
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 
@@ -46,7 +50,10 @@ public class ServicesResource {
    @GET
    @Produces(APPLICATION_JSON)
    public Response all() {
-      return Response.ok(snoopClientRegistry.getServiceConfigs()).build();
+
+      final Collection<SnoopConfig> serviceConfigs = snoopClientRegistry.getServiceConfigs();
+
+      return Response.ok(new GenericEntity<Collection<SnoopConfig>>(serviceConfigs) {}).build();
    }
 
    @GET
