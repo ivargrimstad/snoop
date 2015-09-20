@@ -26,7 +26,6 @@ package eu.agilejava.snoop.api;
 import eu.agilejava.snoop.SnoopClientRegistry;
 import eu.agilejava.snoop.SnoopConfig;
 import java.util.Collection;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
