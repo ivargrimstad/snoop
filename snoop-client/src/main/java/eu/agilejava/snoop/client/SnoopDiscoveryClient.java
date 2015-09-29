@@ -33,6 +33,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 
 /**
+ * Client API for calling services registered with Snoop.
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
@@ -69,6 +70,14 @@ public class SnoopDiscoveryClient {
       LOGGER.info(() -> "client created for " + applicationName);
    }
 
+   /**
+    * Locator to get the service root for the service registered with Snoop.
+    * Use this method if the convenience methods simpleXXX are not sufficient.
+    *
+    * @return the serviceRoot
+    *
+    * @throws SnoopServiceUnavailableException if service is not available
+    */
    public WebTarget getServiceRoot() throws SnoopServiceUnavailableException {
 
       SnoopConfig snoopConfig = getConfigFromSnoop();
@@ -79,6 +88,12 @@ public class SnoopDiscoveryClient {
               .path(snoopConfig.getApplicationServiceRoot());
    }
 
+   /**
+    * Convenience method for making a simple GET request on a resource.
+    *
+    * @param resourcePath The relative path to the resource
+    * @return an optional response that is empty if the service is unavailable.
+    */
    public Optional<Response> simpleGet(String resourcePath) {
 
       Optional<Response> returnValue = Optional.empty();
@@ -97,6 +112,12 @@ public class SnoopDiscoveryClient {
       return returnValue;
    }
 
+   /**
+    * Convenience method for making a simple DELETE request on a resource.
+    *
+    * @param resourcePath The relative path to the resource
+    * @return an optional response that is empty if the service is unavailable.
+    */
    public Optional<Response> simpleDelete(String resourcePath) {
 
       Optional<Response> returnValue = Optional.empty();
@@ -114,17 +135,24 @@ public class SnoopDiscoveryClient {
 
       return returnValue;
    }
-   
-   public Optional<Response> simplePut(String resourcePath, Object entity) {
-      
+
+   /**
+    * Convenience method for making a simple PUT request on a resource.
+    *
+    * @param resourcePath The relative path to the resource
+    * @param resource The changes made to this resource
+    * @return an optional response that is empty if the service is unavailable.
+    */
+   public Optional<Response> simplePut(String resourcePath, Object resource) {
+
       Optional<Response> returnValue = Optional.empty();
-      
+
       try {
 
          returnValue = Optional.of(getServiceRoot()
                  .path(resourcePath)
                  .request()
-                 .put(Entity.entity(entity, APPLICATION_JSON)));
+                 .put(Entity.entity(resource, APPLICATION_JSON)));
 
       } catch (SnoopServiceUnavailableException e) {
          LOGGER.warning(() -> "Service unavailable for " + applicationName);
@@ -133,16 +161,23 @@ public class SnoopDiscoveryClient {
       return returnValue;
    }
 
-   public Optional<Response> simplePost(String resourcePath, Object entity) {
-      
+   /**
+    * Convenience method for making a simple POST request on a resource.
+    *
+    * @param resourcePath The relative path to the resource
+    * @param resource The new resource
+    * @return an optional response that is empty if the service is unavailable.
+    */
+   public Optional<Response> simplePost(String resourcePath, Object resource) {
+
       Optional<Response> returnValue = Optional.empty();
-      
+
       try {
 
          returnValue = Optional.of(getServiceRoot()
                  .path(resourcePath)
                  .request()
-                 .post(Entity.entity(entity, APPLICATION_JSON)));
+                 .post(Entity.entity(resource, APPLICATION_JSON)));
 
       } catch (SnoopServiceUnavailableException e) {
          LOGGER.warning(() -> "Service unavailable for " + applicationName);
