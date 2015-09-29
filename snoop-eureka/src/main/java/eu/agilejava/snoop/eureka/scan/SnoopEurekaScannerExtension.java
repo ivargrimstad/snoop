@@ -56,10 +56,11 @@ public class SnoopEurekaScannerExtension implements Extension {
       LOGGER.config("Finished scanning for Eureka clients");
    }
 
-   <T> void processAnnotatedType(@Observes @WithAnnotations(EnableEurekaClient.class) ProcessAnnotatedType<T> pat) {
+   <T> void processAnnotatedType(@Observes @WithAnnotations({EnableEurekaClient.class}) ProcessAnnotatedType<T> pat) {
+      
       LOGGER.config(() -> "Found @EnableEurekaClient annotated class: " + pat.getAnnotatedType().getJavaClass().getName());
       eurekaEnabled = true;
-      applicationName = pat.getAnnotatedType().getAnnotation(EnableEurekaClient.class).applicationName();
+      applicationName = pat.getAnnotatedType().getAnnotation(EnableEurekaClient.class).name();
       LOGGER.config(() -> "Eureka application name is: " + applicationName);
    }
 }
