@@ -51,7 +51,7 @@ public class HelloWorldResource {
    @GET
    public Response greet() {
 
-      LOGGER.info(() -> "jalla " + helloService);
+      LOGGER.info(() -> "greeting " + helloService);
 
       String helloResponse = helloService.simpleGet("hello")
               .filter(r -> r.getStatus() == 200)
