@@ -66,6 +66,10 @@
                   </goals>
                </execution>
             </executions>
+            <configuration>
+               <!--<jboss.http.port>8093</jboss.http.port>-->
+               <httpPort>8093</httpPort>
+            </configuration>
          </plugin>
       </plugins>
    </build>

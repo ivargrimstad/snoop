@@ -1,6 +1,6 @@
 snoop:
    host: http://localhost
-   port: 8080
+   port: 8093
    serviceRoot: snoop-swarm/api
    
 #   serviceHost: localhost:8080/snoop-service/
