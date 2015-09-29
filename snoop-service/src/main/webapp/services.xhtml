@@ -12,25 +12,25 @@
          <ui:define name="content">
 
             <h2>Registered Clients</h2>
+            <h:form>
+               <h:dataTable value="${snoopController.clientConfigurations}" var="client">
 
-            <h:dataTable value="${snoopController.clientConfigurations}" var="client">
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Application Name"/>
+                     </f:facet>
+                     <h:outputText value="#{client.applicationName}"/>
+                  </h:column>
 
-               <h:column>
-                  <f:facet name="header">
-                     <h:outputText value="Application Name"/>
-                  </f:facet>
-                  <h:outputText value="#{client.applicationName}"/>
-               </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Application Home"/>
+                     </f:facet>
+                     <h:outputLink target="_blank" value="#{client.applicationHome}#{client.applicationServiceRoot}">#{client.applicationHome}#{client.applicationServiceRoot}</h:outputLink>
+                  </h:column>
 
-               <h:column>
-                  <f:facet name="header">
-                     <h:outputText value="Application Home"/>
-                  </f:facet>
-                  <h:outputText value="#{client.applicationHome}"/>
-               </h:column>
-
-            </h:dataTable>
-
+               </h:dataTable>
+            </h:form>
          </ui:define>
 
       </ui:composition>
