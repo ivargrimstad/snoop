@@ -25,29 +25,12 @@
    <dependencies>
       <dependency>
          <groupId>eu.agilejava</groupId>
-         <artifactId>snoop</artifactId>
+         <artifactId>snoop-swarm</artifactId>
          <version>1.3.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-         <groupId>org.glassfish</groupId>
-         <artifactId>javax.json</artifactId>
-         <version>1.0.4</version>
       </dependency>
       <dependency>
          <groupId>org.wildfly.swarm</groupId>
          <artifactId>wildfly-swarm-jaxrs</artifactId>
-         <version>1.0.0.Alpha4</version>
-         <scope>provided</scope>
-      </dependency>      
-      <dependency>
-         <groupId>org.wildfly.swarm</groupId>
-         <artifactId>wildfly-swarm-ejb</artifactId>
-         <version>1.0.0.Alpha4</version>
-         <scope>provided</scope>
-      </dependency>      
-      <dependency>
-         <groupId>org.wildfly.swarm</groupId>
-         <artifactId>wildfly-swarm-weld</artifactId>
          <version>1.0.0.Alpha4</version>
          <scope>provided</scope>
       </dependency>      
