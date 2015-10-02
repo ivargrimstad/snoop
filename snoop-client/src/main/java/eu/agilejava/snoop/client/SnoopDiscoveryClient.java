@@ -72,7 +72,9 @@ public class SnoopDiscoveryClient {
 
    /**
     * Locator to get the service root for the service registered with Snoop.
-    * Use this method if the convenience methods simpleXXX are not sufficient.
+    *
+    * Use this method if the convenience methods simpleXXX are not sufficient
+    * or to avoid the extra call to Snoop for every request.
     *
     * @return the serviceRoot
     *
@@ -91,6 +93,9 @@ public class SnoopDiscoveryClient {
    /**
     * Convenience method for making a simple GET request on a resource.
     *
+    * Calling this method will result in a call to Snoop to retrieve the current
+    * configuration for the service in addition to the actual GET request. 
+    * 
     * @param resourcePath The relative path to the resource
     * @return an optional response that is empty if the service is unavailable.
     */
@@ -115,6 +120,9 @@ public class SnoopDiscoveryClient {
    /**
     * Convenience method for making a simple DELETE request on a resource.
     *
+    * Calling this method will result in a call to Snoop to retrieve the current
+    * configuration for the service in addition to the actual DELETE request. 
+    * 
     * @param resourcePath The relative path to the resource
     * @return an optional response that is empty if the service is unavailable.
     */
@@ -139,6 +147,9 @@ public class SnoopDiscoveryClient {
    /**
     * Convenience method for making a simple PUT request on a resource.
     *
+    * Calling this method will result in a call to Snoop to retrieve the current
+    * configuration for the service in addition to the actual PUT request. 
+    * 
     * @param resourcePath The relative path to the resource
     * @param resource The changes made to this resource
     * @return an optional response that is empty if the service is unavailable.
@@ -164,6 +175,9 @@ public class SnoopDiscoveryClient {
    /**
     * Convenience method for making a simple POST request on a resource.
     *
+    * Calling this method will result in a call to Snoop to retrieve the current
+    * configuration for the service in addition to the actual POST request. 
+    * 
     * @param resourcePath The relative path to the resource
     * @param resource The new resource
     * @return an optional response that is empty if the service is unavailable.
