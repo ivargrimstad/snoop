@@ -34,7 +34,7 @@ import javax.enterprise.util.Nonbinding;
 import javax.inject.Qualifier;
 
 /**
- * Annotation for enabling applicationName snoop service.
+ * Annotation for looking up a service registered with Snoop.
  * 
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
@@ -44,6 +44,10 @@ import javax.inject.Qualifier;
 @Target({FIELD, METHOD})
 public @interface Snoop {
    
+   /**
+    * 
+    * @return The application name
+    */
    @Nonbinding
    String applicationName() default "";
 }
