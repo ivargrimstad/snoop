@@ -37,6 +37,7 @@
       <module>snoop</module>
       <module>snoop-client</module>
       <module>snoop-service</module>
+      <module>snoop-swarm</module>
    </modules>
    
    <dependencies>
