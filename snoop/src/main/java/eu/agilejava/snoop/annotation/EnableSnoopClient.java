@@ -47,12 +47,12 @@ import javax.enterprise.util.Nonbinding;
 public @interface EnableSnoopClient {
    
    /**
-    * The application name.
+    * The application serviceName.
     * This is the unique identifier for this application when it is registered 
     * with Snoop.
     * 
-    * @return The application name
+    * @return The application serviceName
     */
    @Nonbinding
-   String name();
+   String serviceName();
 }
