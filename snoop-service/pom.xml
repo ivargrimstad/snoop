@@ -15,78 +15,77 @@
       <version>1.3.0-SNAPSHOT</version>
    </parent>
 
-   <dependencies>
-
-      <!-- Needed until Java EE 8 -->
-      <!--      <dependency>-->
-      <!--         <groupId>javax.mvc</groupId>-->
-      <!--         <artifactId>javax.mvc-api</artifactId>-->
-      <!--         <version>1.0-edr1</version>-->
-      <!--      </dependency>-->
-      <!--      <dependency>-->
-      <!--         <groupId>com.oracle.ozark</groupId>-->
-      <!--         <artifactId>ozark</artifactId>-->
-      <!--         <version>1.0.0-m01</version>-->
-      <!--         <scope>runtime</scope>-->
-      <!--      </dependency>  -->
-   </dependencies>   
-
-   <build>
-      <plugins>
-         <plugin>
-            <groupId>com.spotify</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>0.2.11</version>
-            <configuration>
-               <serverId>docker-hub</serverId>
-               <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>
-               <baseImage>glassfish:4.1-jdk8</baseImage>
-               <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
-               <resources>
-                  <resource>
-                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/config/</targetPath>
-                     <directory>${basedir}/src/main/glassfish</directory>
-                     <include>logging.properties</include>
-                  </resource>
-                  <resource>
-                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/lib/ext/</targetPath>
-                     <directory>${basedir}/src/main/glassfish</directory>
-                     <include>custom-logger-0.4.jar</include>
-                  </resource>
-                  <resource>
-                     <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
-                     <directory>${basedir}/target</directory>
-                     <include>${project.build.finalName}.war</include>
-                  </resource>
-               </resources>                     
-               <entryPoint>["asadmin", "start-domain", "--verbose"]</entryPoint>
-            </configuration>
-         </plugin>
-
-         <!--         <plugin>-->
-         <!--            <groupId>com.spotify</groupId>-->
-         <!--            <artifactId>docker-maven-plugin</artifactId>-->
-         <!--            <version>0.2.11</version>-->
-         <!--            <configuration>-->
-         <!--               <serverId>docker-hub</serverId>-->
-         <!--               <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>-->
-         <!--               <baseImage>jboss/wildfly:9.0.1.Final</baseImage>-->
-         <!--               <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>-->
-         <!--               <resources>-->
-         <!--                  <resource>-->
-         <!--                     <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>-->
-         <!--                     <directory>${basedir}/src/main/wildfly</directory>-->
-         <!--                     <include>standalone-snoop.xml</include>-->
-         <!--                  </resource>-->
-         <!--                  <resource>-->
-         <!--                     <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>-->
-         <!--                     <directory>${basedir}/target</directory>-->
-         <!--                     <include>${project.build.finalName}.war</include>-->
-         <!--                  </resource>-->
-         <!--               </resources>                     -->
-         <!--               <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>-->
-         <!--            </configuration>-->
-         <!--         </plugin>-->
-      </plugins>
-   </build>
+   <profiles>
+      <profile>
+         <id>glassfish</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>com.spotify</groupId>
+                  <artifactId>docker-maven-plugin</artifactId>
+                  <version>0.2.11</version>
+                  <configuration>
+                     <serverId>docker-hub</serverId>
+                     <imageName>ivargrimstad/${project.artifactId}:${project.version}</imageName>
+                     <baseImage>glassfish:4.1-jdk8</baseImage>
+                     <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
+                     <resources>
+                        <resource>
+                           <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/config/</targetPath>
+                           <directory>${basedir}/src/main/glassfish</directory>
+                           <include>logging.properties</include>
+                        </resource>
+                        <resource>
+                           <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/lib/ext/</targetPath>
+                           <directory>${basedir}/src/main/glassfish</directory>
+                           <include>custom-logger-0.4.jar</include>
+                        </resource>
+                        <resource>
+                           <targetPath>/usr/local/glassfish4/glassfish/domains/domain1/autodeploy/</targetPath>
+                           <directory>${basedir}/target</directory>
+                           <include>${project.build.finalName}.war</include>
+                        </resource>
+                     </resources>                     
+                     <entryPoint>["asadmin", "start-domain", "--verbose"]</entryPoint>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+      <profile>
+         <id>wildfly</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>com.spotify</groupId>
+                  <artifactId>docker-maven-plugin</artifactId>
+                  <version>0.2.11</version>
+                  <configuration>
+                     <serverId>docker-hub</serverId>
+                     <imageName>ivargrimstad/${project.artifactId}:${project.version}-wildfly</imageName>
+                     <baseImage>jboss/wildfly:9.0.1.Final</baseImage>
+                     <maintainer>Ivar Grimstad (ivar.grimstad@gmail.com)</maintainer>
+                     <resources>
+                        <resource>
+                           <targetPath>/opt/jboss/wildfly/standalone/configuration/</targetPath>
+                           <directory>${basedir}/src/main/wildfly</directory>
+                           <include>standalone-snoop.xml</include>
+                        </resource>
+                        <resource>
+                           <targetPath>/opt/jboss/wildfly/standalone/deployments/</targetPath>
+                           <directory>${basedir}/target</directory>
+                           <include>${project.build.finalName}.war</include>
+                        </resource>
+                     </resources>                     
+                     <entryPoint>["/opt/jboss/wildfly/bin/standalone.sh", "-c", "standalone-snoop.xml", "-b", "0.0.0.0"]</entryPoint>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+ 
+      </profile>
+   </profiles>
 </project>
