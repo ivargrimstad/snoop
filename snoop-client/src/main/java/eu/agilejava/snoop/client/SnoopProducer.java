@@ -52,13 +52,13 @@ public class SnoopProducer {
    @Snoop
    @Produces
    @Dependent
-   public SnoopDiscoveryClient lookup(InjectionPoint ip) {
+   public SnoopServiceClient lookup(InjectionPoint ip) {
 
       final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).applicationName();
 
       LOGGER.config(() -> "producing " + applicationName);
 
-      return new SnoopDiscoveryClient.Builder(applicationName)
+      return new SnoopServiceClient.Builder(applicationName)
               .serviceUrl(serviceUrl)
               .build();
    }

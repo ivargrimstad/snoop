@@ -37,7 +37,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
-public class SnoopDiscoveryClient {
+public class SnoopServiceClient {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
    private static final String DEFAULT_BASE_URI = "http://localhost:8080/snoop-service/";
@@ -59,12 +59,12 @@ public class SnoopDiscoveryClient {
          return this;
       }
 
-      SnoopDiscoveryClient build() {
-         return new SnoopDiscoveryClient(this);
+      SnoopServiceClient build() {
+         return new SnoopServiceClient(this);
       }
    }
 
-   private SnoopDiscoveryClient(final Builder builder) {
+   private SnoopServiceClient(final Builder builder) {
       this.applicationName = builder.applicationName;
       this.serviceUrl = builder.serviceUrl;
       LOGGER.info(() -> "client created for " + applicationName);
