@@ -59,7 +59,7 @@ import javax.websocket.WebSocketContainer;
 @ClientEndpoint
 @Singleton
 @Startup
-public class SnoopClient {
+public class SnoopRegistrationClient {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
    private static final String REGISTER_ENDPOINT = "snoop";

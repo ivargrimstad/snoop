@@ -11,20 +11,20 @@
 
          <ui:define name="content">
 
-            <h2>Registered Clients</h2>
+            <h2>Registered Services</h2>
             <h:form>
                <h:dataTable value="${snoopController.clientConfigurations}" var="client">
 
                   <h:column>
                      <f:facet name="header">
-                        <h:outputText value="Application Name"/>
+                        <h:outputText value="Service Name"/>
                      </f:facet>
                      <h:outputText value="#{client.applicationName}"/>
                   </h:column>
 
                   <h:column>
                      <f:facet name="header">
-                        <h:outputText value="Application Home"/>
+                        <h:outputText value="Service Home"/>
                      </f:facet>
                      <h:outputLink target="_blank" value="#{client.applicationHome}#{client.applicationServiceRoot}">#{client.applicationHome}#{client.applicationServiceRoot}</h:outputLink>
                   </h:column>
