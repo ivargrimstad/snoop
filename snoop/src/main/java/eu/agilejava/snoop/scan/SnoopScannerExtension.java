@@ -42,7 +42,7 @@ public class SnoopScannerExtension implements Extension {
 
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
-   private String applicationName;
+   private String serviceName;
    private boolean snoopEnabled;
 
    void beforeBeanDiscovery(@Observes BeforeBeanDiscovery bbd) {
@@ -51,7 +51,7 @@ public class SnoopScannerExtension implements Extension {
 
    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
 
-      SnoopExtensionHelper.setApplicationName(applicationName);
+      SnoopExtensionHelper.setServiceName(serviceName);
       SnoopExtensionHelper.setSnoopEnabled(snoopEnabled);
       LOGGER.config("Finished scanning for Snoop clients");
    }
@@ -63,7 +63,7 @@ public class SnoopScannerExtension implements Extension {
 
       LOGGER.config(() -> "Found @EnableSnoopClient annotated class: " + snoopAnnotated.getAnnotatedType().getJavaClass().getName());
       snoopEnabled = true;
-      applicationName = snoopAnnotated.getAnnotatedType().getAnnotation(EnableSnoopClient.class).serviceName();
-      LOGGER.config(() -> "Snoop Application name is: " + applicationName);
+      serviceName = snoopAnnotated.getAnnotatedType().getAnnotation(EnableSnoopClient.class).serviceName();
+      LOGGER.config(() -> "Snoop Service name is: " + serviceName);
    }
 }

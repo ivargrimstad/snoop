@@ -19,14 +19,14 @@
                      <f:facet name="header">
                         <h:outputText value="Service Name"/>
                      </f:facet>
-                     <h:outputText value="#{client.applicationName}"/>
+                     <h:outputText value="#{client.serviceName}"/>
                   </h:column>
 
                   <h:column>
                      <f:facet name="header">
                         <h:outputText value="Service Home"/>
                      </f:facet>
-                     <h:outputLink target="_blank" value="#{client.applicationHome}#{client.applicationServiceRoot}">#{client.applicationHome}#{client.applicationServiceRoot}</h:outputLink>
+                     <h:outputLink target="_blank" value="#{client.serviceHome}#{client.serviceRoot}">#{client.serviceHome}#{client.serviceRoot}</h:outputLink>
                   </h:column>
 
                </h:dataTable>

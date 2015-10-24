@@ -5,7 +5,7 @@
  <dependency>
     <groupId>eu.agilejava</groupId>
     <artifactId>snoop-client</artifactId>
-    <version>1.2.0</version>
+    <version>${snoop.version}/version>
  </dependency>
 
 . Configure the client
@@ -27,7 +27,7 @@
 Example:
 
  @Inject
- @Snoop(applicationName = "snoophello")
+ @Snoop(serviceName = "snoophello")
  private SnoopDiscoveryClient helloService;
  ...
     String helloResponse = helloService.simpleGet("hello")

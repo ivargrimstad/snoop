@@ -5,12 +5,12 @@
  <dependency>
     <groupId>eu.agilejava</groupId>
     <artifactId>snoop</artifactId>
-    <version>1.2.0</version>
+    <version>${snoop.version}</version>
  </dependency>
 
 . Enable Snoop
 
- @EnableSnoopClient(name="myservice")
+ @EnableSnoopClient(serviceName="myservice")
  @ApplicationPath("api")
  public class ApplicationConfig extends Application {
    ...

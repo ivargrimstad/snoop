@@ -54,7 +54,7 @@ public class SnoopProducer {
    @Dependent
    public SnoopServiceClient lookup(InjectionPoint ip) {
 
-      final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).applicationName();
+      final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).serviceName();
 
       LOGGER.config(() -> "producing " + applicationName);
 

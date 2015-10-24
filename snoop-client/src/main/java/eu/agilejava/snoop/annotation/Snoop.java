@@ -49,5 +49,5 @@ public @interface Snoop {
     * @return The application name
     */
    @Nonbinding
-   String applicationName() default "";
+   String serviceName() default "";
 }

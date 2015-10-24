@@ -24,7 +24,6 @@
 package eu.agilejava.snoop;
 
 import java.util.Calendar;
-import static java.util.Calendar.getInstance;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -33,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.ejb.Singleton;
+import static java.util.Calendar.getInstance;
 
 /**
  * Register of clients that have registered themselves. Automatically disregarded after a minute without heartbeat.
@@ -49,10 +49,10 @@ public class SnoopClientRegistry {
 
    public void register(final SnoopConfig client) {
       Calendar now = getInstance();
-      clients.put(client.getApplicationName(), now.getTimeInMillis());
-      clientConfigurations.put(client.getApplicationName(), client);
+      clients.put(client.getServiceName(), now.getTimeInMillis());
+      clientConfigurations.put(client.getServiceName(), client);
 
-      LOGGER.config(() -> "Client: " + client.getApplicationName() + " registered up at " + now.getTime());
+      LOGGER.config(() -> "Client: " + client.getServiceName() + " registered up at " + now.getTime());
    }
 
    public void deRegister(final String clientId) {

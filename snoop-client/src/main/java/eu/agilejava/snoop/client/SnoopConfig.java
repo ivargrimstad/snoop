@@ -37,32 +37,32 @@ import javax.json.stream.JsonGenerator;
  */
 public class SnoopConfig {
 
-   private String applicationName;
-   private String applicationHome;
-   private String applicationServiceRoot;
+   private String serviceName;
+   private String serviceHome;
+   private String serviceRoot;
 
-   public String getApplicationName() {
-      return applicationName;
+   public String getServiceName() {
+      return serviceName;
    }
 
-   public void setApplicationName(String applicationName) {
-      this.applicationName = applicationName;
+   public void setServiceName(String serviceName) {
+      this.serviceName = serviceName;
    }
 
-   public String getApplicationHome() {
-      return applicationHome;
+   public String getServiceHome() {
+      return serviceHome;
    }
 
-   public void setApplicationHome(String applicationHome) {
-      this.applicationHome = applicationHome;
+   public void setServiceHome(String serviceHome) {
+      this.serviceHome = serviceHome;
    }
 
-   public String getApplicationServiceRoot() {
-      return applicationServiceRoot;
+   public String getServiceRoot() {
+      return serviceRoot;
    }
 
-   public void setApplicationServiceRoot(String applicationServiceRoot) {
-      this.applicationServiceRoot = applicationServiceRoot;
+   public void setServiceRoot(String serviceRoot) {
+      this.serviceRoot = serviceRoot;
    }
 
    public String toJSON() {
@@ -71,9 +71,9 @@ public class SnoopConfig {
       try (JsonGenerator generator = Json.createGenerator(w)) {
 
          generator.writeStartObject()
-                 .write("applicationName", applicationName)
-                 .write("applicationHome", applicationHome)
-                 .write("applicationServiceRoot", applicationServiceRoot)
+                 .write("serviceName", serviceName)
+                 .write("serviceHome", serviceHome)
+                 .write("serviceRoot", serviceRoot)
                  .writeEnd();
       }
 
@@ -88,9 +88,9 @@ public class SnoopConfig {
 
          JsonObject configJson = reader.readObject();
 
-         config.setApplicationName(configJson.getString("applicationName"));
-         config.setApplicationHome(configJson.getString("applicationHome"));
-         config.setApplicationServiceRoot(configJson.getString("applicationServiceRoot"));
+         config.setServiceName(configJson.getString("serviceName"));
+         config.setServiceHome(configJson.getString("serviceHome"));
+         config.setServiceRoot(configJson.getString("serviceRoot"));
       }
 
       return config;

@@ -86,8 +86,8 @@ public class SnoopServiceClient {
       LOGGER.fine(() -> "looking up service for " + applicationName);
 
       return ClientBuilder.newClient()
-              .target(snoopConfig.getApplicationHome())
-              .path(snoopConfig.getApplicationServiceRoot());
+              .target(snoopConfig.getServiceHome())
+              .path(snoopConfig.getServiceRoot());
    }
 
    /**

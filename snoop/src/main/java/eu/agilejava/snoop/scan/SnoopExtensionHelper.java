@@ -30,17 +30,17 @@ package eu.agilejava.snoop.scan;
  */
 public final class SnoopExtensionHelper {
 
-   private String applicationName;
+   private String serviceName;
    private boolean snoopEnabled;
    
    private static final SnoopExtensionHelper INSTANCE = new SnoopExtensionHelper();
    
-   public static String getApplicationName() {
-      return INSTANCE.applicationName;
+   public static String getServiceName() {
+      return INSTANCE.serviceName;
    }
 
-   public static void setApplicationName(String applicationName) {
-      INSTANCE.applicationName = applicationName;
+   public static void setServiceName(String serviceName) {
+      INSTANCE.serviceName = serviceName;
    }
 
    public static boolean isSnoopEnabled() {

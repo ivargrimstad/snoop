@@ -81,8 +81,8 @@ public class SnoopRegistrationClient {
          try {
             readConfiguration();
 
-            LOGGER.config(() -> "Registering " + applicationConfig.getApplicationName());
-            register(applicationConfig.getApplicationName());
+            LOGGER.config(() -> "Registering " + applicationConfig.getServiceName());
+            register(applicationConfig.getServiceName());
 
          } catch (SnoopConfigurationException e) {
             LOGGER.severe(() -> "Snoop is enabled but not configured properly: " + e.getMessage());
@@ -117,14 +117,14 @@ public class SnoopRegistrationClient {
    @OnMessage
    public void onMessage(Session session, String message) {
       LOGGER.config(() -> "Message: " + message);
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), applicationConfig.toJSON());
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getServiceName(), applicationConfig.toJSON());
    }
 
    @Timeout
    public void health(Timer timer) {
       LOGGER.config(() -> "health update: " + Calendar.getInstance().getTime());
       LOGGER.config(() -> "Next: " + timer.getNextTimeout());
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), applicationConfig.toJSON());
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getServiceName(), applicationConfig.toJSON());
    }
 
    /**
@@ -156,8 +156,8 @@ public class SnoopRegistrationClient {
    @PreDestroy
    private void deregister() {
 
-      LOGGER.config(() -> "Deregistering " + applicationConfig.getApplicationName());
-      sendMessage(STATUS_ENDPOINT + applicationConfig.getApplicationName(), null);
+      LOGGER.config(() -> "Deregistering " + applicationConfig.getServiceName());
+      sendMessage(STATUS_ENDPOINT + applicationConfig.getServiceName(), null);
    }
 
    private void readConfiguration() throws SnoopConfigurationException {
@@ -173,11 +173,11 @@ public class SnoopRegistrationClient {
          LOGGER.config(() -> "No configuration file. Using env properties.");
       }
 
-      applicationConfig.setApplicationName(SnoopExtensionHelper.getApplicationName());
+      applicationConfig.setServiceName(SnoopExtensionHelper.getServiceName());
       final String host = readProperty("host", snoopConfig);
       final String port = readProperty("port", snoopConfig);
-      applicationConfig.setApplicationHome(host + ":" + port + "/");
-      applicationConfig.setApplicationServiceRoot(readProperty("serviceRoot", snoopConfig));
+      applicationConfig.setServiceHome(host + ":" + port + "/");
+      applicationConfig.setServiceRoot(readProperty("serviceRoot", snoopConfig));
 
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
@@ -188,7 +188,7 @@ public class SnoopRegistrationClient {
 
       String property = Optional.ofNullable(System.getProperty(key))
               .orElseGet(() -> {
-                 String envProp = Optional.ofNullable(System.getenv(applicationConfig.getApplicationName() + "." + key))
+                 String envProp = Optional.ofNullable(System.getenv(applicationConfig.getServiceName() + "." + key))
                          .orElseGet(() -> {
                             String confProp = Optional.ofNullable(snoopConfig.get(key))
                                     .orElseThrow(() -> {
