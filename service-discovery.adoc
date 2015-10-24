@@ -23,23 +23,10 @@
  -DsnoopService: 192.168.59.103:8081/snoop-service/
 
 . To discover a service, use the @Snoop qualifier to inject a client to the registered service.
++
+[source,java]
+@Inject
+@Snoop(serviceName = "snoophello")
+private SnoopDiscoveryClient helloService;
 
-Example:
-
- @Inject
- @Snoop(serviceName = "snoophello")
- private SnoopDiscoveryClient helloService;
- ...
-    String helloResponse = helloService.simpleGet("hello")
-              .filter(r -> r.getStatus() == 200)
-              .map(r -> r.readEntity(String.class))
-              .orElse("goodbye");
- ...
- // or
-    try {
-       WebTarget endpoint = helloService.getServiceRoot();
-       ...
-    } catch(SnoopServiceUnavailableException e) {
-    ...
-    }
-...
+. link:service-consumption.adoc[Call the Service]

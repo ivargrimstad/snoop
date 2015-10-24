@@ -1,0 +1,22 @@
+== Consuming a Snoop Service
+
+. link:service-discovery.adoc[Discover the Service]
+
+. Call the service
+.. Use the Client API.
++
+[source,java]
+String helloResponse = helloService.simpleGet("hello")
+              .filter(r -> r.getStatus() == 200)
+              .map(r -> r.readEntity(String.class))
+              .orElse("goodbye");
+
+.. Or use `WebTarget` directly.
++
+[source,java]
+    try {
+       WebTarget endpoint = helloService.getServiceRoot();
+       ...
+    } catch(SnoopServiceUnavailableException e) {
+       ...
+    }
