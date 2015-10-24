@@ -33,3 +33,5 @@
  .. Or by system property
 
   -Dhost=http://192.168.59.103 -Dport=8080 -DserviceRoot=snoop-hello-service/api -DsnoopService: 192.168.59.103:8081/snoop-service/
+
+link:README.adoc[[back]]

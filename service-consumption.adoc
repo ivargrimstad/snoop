@@ -20,3 +20,5 @@ String helloResponse = helloService.simpleGet("hello")
     } catch(SnoopServiceUnavailableException e) {
        ...
     }
+
+link:README.adoc[[back]]

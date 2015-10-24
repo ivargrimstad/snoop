@@ -29,4 +29,6 @@
 @Snoop(serviceName = "hello")
 private SnoopDiscoveryClient helloService;
 
-. link:service-consumption.adoc[Call the Service]
+. link:service-consumption.adoc[Consume the Service]
+
+link:README.adoc[[back]]
