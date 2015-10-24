@@ -181,7 +181,7 @@ public class SnoopRegistrationClient {
 
       LOGGER.config(() -> "application config: " + applicationConfig.toJSON());
 
-      serviceUrl = "ws://" + readProperty("serviceHost", snoopConfig);
+      serviceUrl = "ws://" + readProperty("snoopService", snoopConfig);
    }
 
    private String readProperty(final String key, Map<String, Object> snoopConfig) {

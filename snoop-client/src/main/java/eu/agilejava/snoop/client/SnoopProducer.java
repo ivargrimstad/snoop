@@ -77,7 +77,7 @@ public class SnoopProducer {
          LOGGER.config(() -> "No configuration file. Using env properties.");
       }
 
-      serviceUrl = "http://" + readProperty("serviceHost", snoopConfig);
+      serviceUrl = "http://" + readProperty("snoopService", snoopConfig);
 
       LOGGER.config(() -> "Service URL: " + serviceUrl);
    }

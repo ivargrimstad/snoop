@@ -23,12 +23,12 @@
    host: http://localhost
    port: 8080
    serviceRoot: snoop-hello-service/api
-   serviceHost: 192.168.59.103:8081/snoop-service/
+   snoopService: 192.168.59.103:8081/snoop-service/
 
 .. Or by environment variables (remember prefix with service name)
 
- docker run -it -p 8080:8080 -e "hello.host=http://192.168.59.103" -e "hello.port=8080" -e "hello.serviceRoot=snoop-hello-service/api" -e "hello.serviceHost=192.168.59.103:8081/snoop-service/" ivargrimstad/snoop-hello
+ docker run -it -p 8080:8080 -e "hello.host=http://192.168.59.103" -e "hello.port=8080" -e "hello.serviceRoot=snoop-hello-service/api" -e "hello.snoopService=192.168.59.103:8081/snoop-service/" ivargrimstad/snoop-hello
 
  .. Or by system property
 
-  -Dhost=http://192.168.59.103 -Dport=8080 -DserviceRoot=snoop-hello-service/api -DserviceHost: 192.168.59.103:8081/snoop-service/
+  -Dhost=http://192.168.59.103 -Dport=8080 -DserviceRoot=snoop-hello-service/api -DsnoopService: 192.168.59.103:8081/snoop-service/

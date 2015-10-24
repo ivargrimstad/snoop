@@ -12,15 +12,15 @@
 .. Using `application.yml`
 
  snoop:
-   serviceHost: 192.168.59.103:8081/snoop-service/
+   snoopService: 192.168.59.103:8081/snoop-service/
 
 .. Or by environment variable
 
- docker run -it -p 8080:8080 -e "serviceHost=192.168.59.103:8081/snoop-service/" ivargrimstad/snoop-helloworld:1.0.0-SNAPSHOT
+ docker run -it -p 8080:8080 -e "snoopService=192.168.59.103:8081/snoop-service/" ivargrimstad/snoop-helloworld:1.0.0-SNAPSHOT
 
 .. Or by system property
 
- -DserviceHost: 192.168.59.103:8081/snoop-service/
+ -DsnoopService: 192.168.59.103:8081/snoop-service/
 
 . To discover a service, use the @Snoop qualifier to inject a client to the registered service.
 
