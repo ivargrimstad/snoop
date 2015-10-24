@@ -9,7 +9,8 @@
  </dependency>
 
 . Enable Snoop
-
++
+[source,java]
  @EnableSnoopClient(serviceName="myservice")
  @ApplicationPath("api")
  public class ApplicationConfig extends Application {

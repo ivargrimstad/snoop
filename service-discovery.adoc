@@ -26,7 +26,7 @@
 +
 [source,java]
 @Inject
-@Snoop(serviceName = "snoophello")
+@Snoop(serviceName = "hello")
 private SnoopDiscoveryClient helloService;
 
 . link:service-consumption.adoc[Call the Service]
