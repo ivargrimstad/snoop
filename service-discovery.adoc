@@ -31,4 +31,4 @@ private SnoopDiscoveryClient helloService;
 
 . link:service-consumption.adoc[Consume the Service]
 
-link:README.adoc[[back]]
+link:README.adoc[[back\]]
