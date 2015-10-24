@@ -186,16 +186,19 @@ public class SnoopRegistrationClient {
 
    private String readProperty(final String key, Map<String, Object> snoopConfig) {
 
-      String property = Optional.ofNullable(System.getenv(applicationConfig.getApplicationName() + "." + key))
+      String property = Optional.ofNullable(System.getProperty(key))
               .orElseGet(() -> {
-                 String p = Optional.ofNullable(snoopConfig.get(key))
-                 .orElseThrow(() -> {
-                    return new SnoopConfigurationException(key + " must be configured either in application.yml or as env parameter");
-                 })
-                 .toString();
-                 return p;
+                 String envProp = Optional.ofNullable(System.getenv(applicationConfig.getApplicationName() + "." + key))
+                         .orElseGet(() -> {
+                            String confProp = Optional.ofNullable(snoopConfig.get(key))
+                                    .orElseThrow(() -> {
+                                       return new SnoopConfigurationException(key + " must be configured either in application.yml or as env parameter");
+                                    })
+                                    .toString();
+                            return confProp;
+                         });
+                 return envProp;
               });
-
       return property;
    }
 }
