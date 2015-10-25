@@ -38,7 +38,8 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 /**
- *
+ * CDI Producer for SnoopServiceClient.
+ * 
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ApplicationScoped
@@ -49,6 +50,12 @@ public class SnoopProducer {
 
    private String serviceUrl;
 
+   /**
+    * Creates a SnoopServiceClient for the named service.
+    * 
+    * @param ip The injection point
+    * @return a configured snoop service client
+    */
    @Snoop
    @Produces
    @Dependent
@@ -63,6 +70,9 @@ public class SnoopProducer {
               .build();
    }
 
+   /**
+    * Initializes the producer with the Snoop configuration properties.
+    */
    @PostConstruct
    private void init() {
 

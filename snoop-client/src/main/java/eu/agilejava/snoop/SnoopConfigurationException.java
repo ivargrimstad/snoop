@@ -26,7 +26,8 @@ package eu.agilejava.snoop;
 import javax.ejb.ApplicationException;
 
 /**
- *
+ * This exception indicates that the Snoop configuration is erroneous.
+ * 
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ApplicationException

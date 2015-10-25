@@ -32,7 +32,8 @@ import javax.json.JsonReader;
 import javax.json.stream.JsonGenerator;
 
 /**
- *
+ * Holds the meta data for the registered service.
+ * 
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 public class SnoopConfig {

@@ -58,7 +58,7 @@ public class SnoopScannerExtension implements Extension {
 
    <T> void processAnnotatedType(@Observes @WithAnnotations(EnableSnoopClient.class) ProcessAnnotatedType<T> pat) {
 
-// workaround for WELD bug revealed by JDK8u60
+      // workaround for WELD bug revealed by JDK8u60
       final ProcessAnnotatedType<T> snoopAnnotated = pat;
 
       LOGGER.config(() -> "Found @EnableSnoopClient annotated class: " + snoopAnnotated.getAnnotatedType().getJavaClass().getName());

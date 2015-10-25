@@ -45,8 +45,9 @@ import javax.inject.Qualifier;
 public @interface Snoop {
    
    /**
+    * The name of the service.
     * 
-    * @return The application name
+    * @return The service name
     */
    @Nonbinding
    String serviceName() default "";
