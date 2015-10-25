@@ -70,7 +70,20 @@
    </scm>
    
    <build>
-      <plugins>
+      <plugins>         
+         <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.5.201505241946</version>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>report</goal>
+                  </goals>
+                  <id>report</id>
+               </execution>
+            </executions>
+         </plugin>
          <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
