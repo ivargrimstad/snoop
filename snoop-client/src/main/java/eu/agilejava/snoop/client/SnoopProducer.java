@@ -79,7 +79,7 @@ public class SnoopProducer {
       Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
       try {
          Yaml yaml = new Yaml();
-         Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/application.yml"));
+         Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/snoop.yml"));
 
          snoopConfig = (Map<String, Object>) props.get("snoop");
 
