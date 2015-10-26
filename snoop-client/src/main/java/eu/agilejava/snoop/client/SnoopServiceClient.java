@@ -208,7 +208,7 @@ public class SnoopServiceClient {
                  .path("api")
                  .path("services")
                  .path(applicationName)
-                 .request()
+                 .request(APPLICATION_JSON)
                  .get();
 
          if (response.getStatus() == 200) {
