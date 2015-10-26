@@ -18,7 +18,7 @@
  }
 
 . Configure the service
-.. Use `application.yml`
+.. Use `snoop.yml`
 
  snoop:
    host: http://localhost

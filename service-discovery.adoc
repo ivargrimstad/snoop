@@ -9,7 +9,7 @@
  </dependency>
 
 . Configure the client
-.. Using `application.yml`
+.. Using `snoop.yml`
 
  snoop:
    snoopService: 192.168.59.103:8081/snoop-service/
