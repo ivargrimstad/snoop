@@ -12,7 +12,7 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
 . Released artifacts are available in link:http://search.maven.org/#search%7Cga%7C1%7Csnoop[Maven Central]
 . Snapshots configuration:
- 
+
  <repositories>
     <repository>
        <id>agilejava-snapshots</id>
@@ -25,5 +25,5 @@ Snoop is an experimental registration and discovery service for Java EE based mi
 
 == Examples
 
-- link:snoop-examples[snoop-examples]  
-- link:https://github.com/arun-gupta/microservices[https://github.com/arun-gupta/microservices] 
+- link:snoop-examples[shttps://github.com/ivargrimstad/snoop-samples]  
+- link:https://github.com/arun-gupta/microservices[https://github.com/arun-gupta/microservices]
