@@ -5,3 +5,5 @@
 mechanism. If you are running multiple instances of a microservice, this should
 be load balanced using any load balancer tool and it is the _load balancer's IP/hostname_
 that is registered with snoop using the Snoop configuration parameters.
+
+link:README.adoc[[home\]]

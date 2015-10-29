@@ -21,4 +21,4 @@ String helloResponse = helloService.simpleGet("hello")
        ...
     }
 
-link:README.adoc[[back\]]
+link:README.adoc[[home\]]
