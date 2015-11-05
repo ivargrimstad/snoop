@@ -39,20 +39,19 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 /**
  * CDI Producer for SnoopServiceClient.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ApplicationScoped
 public class SnoopProducer {
 
-   private static final String DEFAULT_BASE_HOST = "localhost:8080/snoop-service/";
    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
-   private String serviceUrl;
+   private Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
 
    /**
     * Creates a SnoopServiceClient for the named service.
-    * 
+    *
     * @param ip The injection point
     * @return a configured snoop service client
     */
@@ -65,9 +64,31 @@ public class SnoopProducer {
 
       LOGGER.config(() -> "producing " + applicationName);
 
+      String serviceUrl = "http://" + readProperty("snoopService", snoopConfig);
+      LOGGER.config(() -> "Service URL: " + serviceUrl);
+
       return new SnoopServiceClient.Builder(applicationName)
               .serviceUrl(serviceUrl)
               .build();
+   }
+
+   private String readProperty(final String key, Map<String, Object> snoopConfig) {
+
+      String property = Optional.ofNullable(System.getProperty(key))
+              .orElseGet(() -> {
+                 String envProp = Optional.ofNullable(System.getenv(key))
+                         .orElseGet(() -> {
+                            String confProp = Optional.ofNullable(snoopConfig.get(key))
+                                    .orElseThrow(() -> {
+                                       return new SnoopConfigurationException(key + " must be configured either in application.yml or as env or system property");
+                                    })
+                                    .toString();
+                            return confProp;
+                         });
+                 return envProp;
+              });
+
+      return property;
    }
 
    /**
@@ -76,7 +97,6 @@ public class SnoopProducer {
    @PostConstruct
    private void init() {
 
-      Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
       try {
          Yaml yaml = new Yaml();
          Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/snoop.yml"));
@@ -86,28 +106,5 @@ public class SnoopProducer {
       } catch (YAMLException e) {
          LOGGER.config(() -> "No configuration file. Using env properties.");
       }
-
-      serviceUrl = "http://" + readProperty("snoopService", snoopConfig);
-
-      LOGGER.config(() -> "Service URL: " + serviceUrl);
-   }
-
-   private String readProperty(final String key, Map<String, Object> snoopConfig) {
-
-      String property = Optional.ofNullable(System.getProperty(key))
-              .orElseGet(() -> {
-                 String envProp = Optional.ofNullable(System.getenv(key))
-                 .orElseGet(() -> {
-                    String confProp = Optional.ofNullable(snoopConfig.get(key))
-                    .orElseThrow(() -> {
-                       return new SnoopConfigurationException(key + " must be configured either in application.yml or as env or system property");
-                    })
-                    .toString();
-                    return confProp;
-                 });
-                 return envProp;
-              });
-
-      return property;
    }
 }
