@@ -1,0 +1,19 @@
+== Classloader Issue with CDI Extensions in separate JAR
+The different strategies for classloading in the application server
+implementations result in a error when Snoop service registration is
+initiated.
+
+See explanation for a similar problem in Mark's blog entry here: https://struberg.wordpress.com/category/cdi/
+
+=== Workaround for GlassFish
+
+. Copy the snoop jar (currently `snoop-1.3.1.jar`) to `$GLASSFISH_HOME/glassfish/domains/domain1/lib/ext`
++
+. Change the scope of the snoop dependency in your `pom.xml` to provided
+[source,java]
+<dependency>
+  <groupId>eu.agilejava</groupId>
+   <artifactId>snoop</artifactId>
+   <version>${snoop.version}</version>
+   <scope>provided</scope>
+</dependency>
