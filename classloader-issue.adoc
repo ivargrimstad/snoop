@@ -5,6 +5,9 @@ initiated.
 
 See explanation for a similar problem in Mark's blog entry here: https://struberg.wordpress.com/category/cdi/
 
+*Note* that the workarounds described below only applies to service registration.
+Service discovery works without it.
+
 === Workaround for GlassFish
 
 . Copy the snoop jar (currently `snoop-1.3.1.jar`) to `$GLASSFISH_HOME/glassfish/domains/domain1/lib/ext`
