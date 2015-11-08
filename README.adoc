@@ -23,9 +23,13 @@ Snoop is an experimental registration and discovery service for Java EE based mi
     </repository>
  </repositories>
 
+== Classloader Issue
+
+- link:classloader-issue.adoc[Description and Workaround]
+
 == Examples
 
-- link:https://github.com/ivargrimstad/snoop-samples[snoop-samples@GitHub]  
+- link:https://github.com/ivargrimstad/snoop-samples[snoop-samples@GitHub]
 - link:https://github.com/arun-gupta/microservices[https://github.com/arun-gupta/microservices]
 
 == FAQ
