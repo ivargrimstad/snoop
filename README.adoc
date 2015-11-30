@@ -1,6 +1,6 @@
-= Snoop - A Discovery Service for Java EE
+= SnoopEE - A Discovery Service for Java EE
 
-Snoop is an experimental registration and discovery service for Java EE based microservices.
+SnoopEE [ˈsnuːpı] is an experimental registration and discovery service for Java EE based microservices.
 
 == Getting Started
 
