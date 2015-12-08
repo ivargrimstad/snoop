@@ -42,14 +42,15 @@ public class SnoopService {
    @PostConstruct
    private void start() {
 
-      LOGGER.config("   _____                         ");
-      LOGGER.config("  / ____|                        ");
-      LOGGER.config(" | (___  _ __   ___   ___  _ __  ");
-      LOGGER.config("  \\___ \\| '_ \\ / _ \\ / _ \\| '_ \\ ");
-      LOGGER.config("  ____) | | | | (_) | (_) | |_) |");
-      LOGGER.config(" |_____/|_| |_|\\___/ \\___/| .__/ ");
-      LOGGER.config("                          | |    ");
-      LOGGER.config("                          |_|    ");
+        // http://www.network-science.de/ascii/ Font: big
+        LOGGER.config("  _____                         ______ ______ ");
+        LOGGER.config(" / ____|                       |  ____|  ____|");
+        LOGGER.config("| (___  _ __   ___   ___  _ __ | |__  | |__   ");
+        LOGGER.config(" \\___ \\| '_ \\ / _ \\ / _ \\| '_ \\|  __| |  __|  ");
+        LOGGER.config(" ____) | | | | (_) | (_) | |_) | |____| |____ ");
+        LOGGER.config("|_____/|_| |_|\\___/ \\___/| .__/|______|______|");
+        LOGGER.config("                         | |                  ");
+        LOGGER.config("                         |_|                  ");
 
    }
    
