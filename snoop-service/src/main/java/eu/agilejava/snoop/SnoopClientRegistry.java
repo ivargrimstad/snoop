@@ -59,7 +59,7 @@ public class SnoopClientRegistry {
       clients.remove(clientId);
       clientConfigurations.remove(clientId);
 
-      LOGGER.config(() -> "Client: " + clientId + " deregistered at " + Calendar.getInstance().getTime());
+      LOGGER.warning(() -> "Client: " + clientId + " deregistered at " + Calendar.getInstance().getTime());
    }
 
    public Set<String> getClients() {

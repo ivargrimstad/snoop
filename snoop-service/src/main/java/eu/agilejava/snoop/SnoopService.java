@@ -56,6 +56,6 @@ public class SnoopService {
    
    @PreDestroy
    private void stop() {
-      LOGGER.severe("Snoop stopped");
+      LOGGER.severe("SnoopEE stopped");
    }
 }
