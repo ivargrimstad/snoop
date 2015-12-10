@@ -6,8 +6,8 @@
    <version>1.3.2-SNAPSHOT</version>
    <packaging>war</packaging>
 
-   <name>Snoop Service</name>
-   <description>Snoop - A Discovery Service for Java EE.</description>
+   <name>SnoopEE Service</name>
+   <description>SnoopEE - A Discovery Service for Java EE.</description>
 
    <parent>
       <groupId>eu.agilejava</groupId>

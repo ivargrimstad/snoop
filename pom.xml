@@ -6,8 +6,8 @@
    <version>1.3.2-SNAPSHOT</version>
    <packaging>pom</packaging>
 
-   <name>Snoop Root</name>
-   <description>Snoop - A Discovery Service for Java EE.</description>
+   <name>SnoopEE Root</name>
+   <description>SnoopEE - A Discovery Service for Java EE</description>
    <url>https://github.com/ivargrimstad/snoop</url>
 
    <licenses>
