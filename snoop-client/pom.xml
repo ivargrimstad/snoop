@@ -6,8 +6,8 @@
    <version>1.3.2-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Snoop Client</name>
-   <description>Snoop Discovery Client.</description>
+   <name>SnoopEE Client</name>
+   <description>SnoopEE Discovery Client</description>
 
    <parent>
       <groupId>eu.agilejava</groupId>

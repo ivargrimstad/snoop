@@ -6,8 +6,8 @@
    <version>1.3.2-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Snoop</name>
-   <description>Snoop Registration Client.</description>
+   <name>SnoopEE</name>
+   <description>SnoopEE Registration Client</description>
 
    <parent>
       <groupId>eu.agilejava</groupId>

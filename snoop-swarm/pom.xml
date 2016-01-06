@@ -6,7 +6,8 @@
    <version>1.3.2-SNAPSHOT</version>
    <packaging>jar</packaging>
 
-   <name>Snoop Swarm</name>
+   <name>SnoopEE Swarm</name>
+   <description>SnoopEE Swarm Registration Client</description>
 
    <parent>
       <groupId>eu.agilejava</groupId>
