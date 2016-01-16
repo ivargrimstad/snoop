@@ -23,10 +23,6 @@ SnoopEE [ˈsnuːpı] is an experimental registration and discovery service for J
     </repository>
  </repositories>
 
-== Classloader Issue
-
-- link:classloader-issue.adoc[Description and Workaround]
-
 == Examples
 
 - link:https://github.com/ivargrimstad/snoop-samples[snoop-samples@GitHub]
