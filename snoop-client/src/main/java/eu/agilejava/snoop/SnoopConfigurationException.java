@@ -27,28 +27,28 @@ import javax.ejb.ApplicationException;
 
 /**
  * This exception indicates that the Snoop configuration is erroneous.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ApplicationException
 public class SnoopConfigurationException extends RuntimeException {
 
-   public SnoopConfigurationException() {
-   }
+    public SnoopConfigurationException() {
+    }
 
-   public SnoopConfigurationException(String message) {
-      super(message);
-   }
+    public SnoopConfigurationException(String message) {
+        super(message);
+    }
 
-   public SnoopConfigurationException(String message, Throwable cause) {
-      super(message, cause);
-   }
+    public SnoopConfigurationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-   public SnoopConfigurationException(Throwable cause) {
-      super(cause);
-   }
+    public SnoopConfigurationException(Throwable cause) {
+        super(cause);
+    }
 
-   public SnoopConfigurationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-      super(message, cause, enableSuppression, writableStackTrace);
-   }
+    public SnoopConfigurationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

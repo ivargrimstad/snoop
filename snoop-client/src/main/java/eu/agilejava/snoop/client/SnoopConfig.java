@@ -33,67 +33,67 @@ import javax.json.stream.JsonGenerator;
 
 /**
  * Holds the meta data for the registered service.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 public class SnoopConfig {
 
-   private String serviceName;
-   private String serviceHome;
-   private String serviceRoot;
+    private String serviceName;
+    private String serviceHome;
+    private String serviceRoot;
 
-   public String getServiceName() {
-      return serviceName;
-   }
+    public String getServiceName() {
+        return serviceName;
+    }
 
-   public void setServiceName(String serviceName) {
-      this.serviceName = serviceName;
-   }
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
 
-   public String getServiceHome() {
-      return serviceHome;
-   }
+    public String getServiceHome() {
+        return serviceHome;
+    }
 
-   public void setServiceHome(String serviceHome) {
-      this.serviceHome = serviceHome;
-   }
+    public void setServiceHome(String serviceHome) {
+        this.serviceHome = serviceHome;
+    }
 
-   public String getServiceRoot() {
-      return serviceRoot;
-   }
+    public String getServiceRoot() {
+        return serviceRoot;
+    }
 
-   public void setServiceRoot(String serviceRoot) {
-      this.serviceRoot = serviceRoot;
-   }
+    public void setServiceRoot(String serviceRoot) {
+        this.serviceRoot = serviceRoot;
+    }
 
-   public String toJSON() {
+    public String toJSON() {
 
-      Writer w = new StringWriter();
-      try (JsonGenerator generator = Json.createGenerator(w)) {
+        Writer w = new StringWriter();
+        try (JsonGenerator generator = Json.createGenerator(w)) {
 
-         generator.writeStartObject()
-                 .write("serviceName", serviceName)
-                 .write("serviceHome", serviceHome)
-                 .write("serviceRoot", serviceRoot)
-                 .writeEnd();
-      }
+            generator.writeStartObject()
+                    .write("serviceName", serviceName)
+                    .write("serviceHome", serviceHome)
+                    .write("serviceRoot", serviceRoot)
+                    .writeEnd();
+        }
 
-      return w.toString();
-   }
+        return w.toString();
+    }
 
-   public static SnoopConfig fromJSON(String json) {
+    public static SnoopConfig fromJSON(String json) {
 
-      SnoopConfig config = new SnoopConfig();
+        SnoopConfig config = new SnoopConfig();
 
-      try (JsonReader reader = Json.createReader(new StringReader(json))) {
+        try (JsonReader reader = Json.createReader(new StringReader(json))) {
 
-         JsonObject configJson = reader.readObject();
+            JsonObject configJson = reader.readObject();
 
-         config.setServiceName(configJson.getString("serviceName"));
-         config.setServiceHome(configJson.getString("serviceHome"));
-         config.setServiceRoot(configJson.getString("serviceRoot"));
-      }
+            config.setServiceName(configJson.getString("serviceName"));
+            config.setServiceHome(configJson.getString("serviceHome"));
+            config.setServiceRoot(configJson.getString("serviceRoot"));
+        }
 
-      return config;
-   }
+        return config;
+    }
 }

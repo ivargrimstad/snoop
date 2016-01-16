@@ -45,66 +45,66 @@ import javax.enterprise.inject.spi.InjectionPoint;
 @ApplicationScoped
 public class SnoopProducer {
 
-   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
+    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
-   private Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
+    private Map<String, Object> snoopConfig = Collections.EMPTY_MAP;
 
-   /**
-    * Creates a SnoopServiceClient for the named service.
-    *
-    * @param ip The injection point
-    * @return a configured snoop service client
-    */
-   @Snoop
-   @Produces
-   @Dependent
-   public SnoopServiceClient lookup(InjectionPoint ip) {
+    /**
+     * Creates a SnoopServiceClient for the named service.
+     *
+     * @param ip The injection point
+     * @return a configured snoop service client
+     */
+    @Snoop
+    @Produces
+    @Dependent
+    public SnoopServiceClient lookup(InjectionPoint ip) {
 
-      final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).serviceName();
+        final String applicationName = ip.getAnnotated().getAnnotation(Snoop.class).serviceName();
 
-      LOGGER.config(() -> "producing " + applicationName);
+        LOGGER.config(() -> "producing " + applicationName);
 
-      String serviceUrl = "http://" + readProperty("snoopService", snoopConfig);
-      LOGGER.config(() -> "Service URL: " + serviceUrl);
+        String serviceUrl = "http://" + readProperty("snoopService", snoopConfig);
+        LOGGER.config(() -> "Service URL: " + serviceUrl);
 
-      return new SnoopServiceClient.Builder(applicationName)
-              .serviceUrl(serviceUrl)
-              .build();
-   }
+        return new SnoopServiceClient.Builder(applicationName)
+                .serviceUrl(serviceUrl)
+                .build();
+    }
 
-   private String readProperty(final String key, Map<String, Object> snoopConfig) {
+    private String readProperty(final String key, Map<String, Object> snoopConfig) {
 
-      String property = Optional.ofNullable(System.getProperty(key))
-              .orElseGet(() -> {
-                 String envProp = Optional.ofNullable(System.getenv(key))
-                         .orElseGet(() -> {
-                            String confProp = Optional.ofNullable(snoopConfig.get(key))
-                                    .orElseThrow(() -> {
-                                       return new SnoopConfigurationException(key + " must be configured either in application.yml or as env or system property");
-                                    })
-                                    .toString();
-                            return confProp;
-                         });
-                 return envProp;
-              });
+        String property = Optional.ofNullable(System.getProperty(key))
+                .orElseGet(() -> {
+                    String envProp = Optional.ofNullable(System.getenv(key))
+                            .orElseGet(() -> {
+                                String confProp = Optional.ofNullable(snoopConfig.get(key))
+                                        .orElseThrow(() -> {
+                                            return new SnoopConfigurationException(key + " must be configured either in application.yml or as env or system property");
+                                        })
+                                        .toString();
+                                return confProp;
+                            });
+                    return envProp;
+                });
 
-      return property;
-   }
+        return property;
+    }
 
-   /**
-    * Initializes the producer with the Snoop configuration properties.
-    */
-   @PostConstruct
-   private void init() {
+    /**
+     * Initializes the producer with the Snoop configuration properties.
+     */
+    @PostConstruct
+    private void init() {
 
-      try {
-         Yaml yaml = new Yaml();
-         Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/snoop.yml"));
+        try {
+            Yaml yaml = new Yaml();
+            Map<String, Object> props = (Map<String, Object>) yaml.load(this.getClass().getResourceAsStream("/snoop.yml"));
 
-         snoopConfig = (Map<String, Object>) props.get("snoop");
+            snoopConfig = (Map<String, Object>) props.get("snoop");
 
-      } catch (YAMLException e) {
-         LOGGER.config(() -> "No configuration file. Using env properties.");
-      }
-   }
+        } catch (YAMLException e) {
+            LOGGER.config(() -> "No configuration file. Using env properties.");
+        }
+    }
 }

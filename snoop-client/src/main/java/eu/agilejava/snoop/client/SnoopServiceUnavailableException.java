@@ -27,11 +27,11 @@ import javax.ejb.ApplicationException;
 
 /**
  * This exception is thrown if the snoop service is not available.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 @ApplicationException
-public class SnoopServiceUnavailableException extends RuntimeException{
+public class SnoopServiceUnavailableException extends RuntimeException {
 
     public SnoopServiceUnavailableException() {
     }
