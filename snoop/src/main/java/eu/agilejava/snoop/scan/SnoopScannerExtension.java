@@ -40,30 +40,30 @@ import javax.enterprise.inject.spi.WithAnnotations;
  */
 public class SnoopScannerExtension implements Extension {
 
-   private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
+    private static final Logger LOGGER = Logger.getLogger("eu.agilejava.snoop");
 
-   private String serviceName;
-   private boolean snoopEnabled;
+    private String serviceName;
+    private boolean snoopEnabled;
 
-   void beforeBeanDiscovery(@Observes BeforeBeanDiscovery bbd) {
-      LOGGER.config("Scanning for Snoop clients");
-   }
+    void beforeBeanDiscovery(@Observes BeforeBeanDiscovery bbd) {
+        LOGGER.config("Scanning for Snoop clients");
+    }
 
-   void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
+    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
 
-      SnoopExtensionHelper.setServiceName(serviceName);
-      SnoopExtensionHelper.setSnoopEnabled(snoopEnabled);
-      LOGGER.config("Finished scanning for Snoop clients");
-   }
+        SnoopExtensionHelper.setServiceName(serviceName);
+        SnoopExtensionHelper.setSnoopEnabled(snoopEnabled);
+        LOGGER.config("Finished scanning for Snoop clients");
+    }
 
-   <T> void processAnnotatedType(@Observes @WithAnnotations(EnableSnoopClient.class) ProcessAnnotatedType<T> pat) {
+    <T> void processAnnotatedType(@Observes @WithAnnotations(EnableSnoopClient.class) ProcessAnnotatedType<T> pat) {
 
-      // workaround for WELD bug revealed by JDK8u60
-      final ProcessAnnotatedType<T> snoopAnnotated = pat;
+        // workaround for WELD bug revealed by JDK8u60
+        final ProcessAnnotatedType<T> snoopAnnotated = pat;
 
-      LOGGER.config(() -> "Found @EnableSnoopClient annotated class: " + snoopAnnotated.getAnnotatedType().getJavaClass().getName());
-      snoopEnabled = true;
-      serviceName = snoopAnnotated.getAnnotatedType().getAnnotation(EnableSnoopClient.class).serviceName();
-      LOGGER.config(() -> "Snoop Service name is: " + serviceName);
-   }
+        LOGGER.config(() -> "Found @EnableSnoopClient annotated class: " + snoopAnnotated.getAnnotatedType().getJavaClass().getName());
+        snoopEnabled = true;
+        serviceName = snoopAnnotated.getAnnotatedType().getAnnotation(EnableSnoopClient.class).serviceName();
+        LOGGER.config(() -> "Snoop Service name is: " + serviceName);
+    }
 }

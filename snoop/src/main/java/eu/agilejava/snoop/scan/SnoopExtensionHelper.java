@@ -25,29 +25,29 @@ package eu.agilejava.snoop.scan;
 
 /**
  * Singleton to store the information gathered from annotation scan.
- * 
+ *
  * @author Ivar Grimstad (ivar.grimstad@gmail.com)
  */
 public final class SnoopExtensionHelper {
 
-   private String serviceName;
-   private boolean snoopEnabled;
-   
-   private static final SnoopExtensionHelper INSTANCE = new SnoopExtensionHelper();
-   
-   public static String getServiceName() {
-      return INSTANCE.serviceName;
-   }
+    private String serviceName;
+    private boolean snoopEnabled;
 
-   public static void setServiceName(String serviceName) {
-      INSTANCE.serviceName = serviceName;
-   }
+    private static final SnoopExtensionHelper INSTANCE = new SnoopExtensionHelper();
 
-   public static boolean isSnoopEnabled() {
-      return INSTANCE.snoopEnabled;
-   }
-   
-   public static void setSnoopEnabled(final boolean snoopEnabled) {
-      INSTANCE.snoopEnabled = snoopEnabled;
-   }
+    public static String getServiceName() {
+        return INSTANCE.serviceName;
+    }
+
+    public static void setServiceName(String serviceName) {
+        INSTANCE.serviceName = serviceName;
+    }
+
+    public static boolean isSnoopEnabled() {
+        return INSTANCE.snoopEnabled;
+    }
+
+    public static void setSnoopEnabled(final boolean snoopEnabled) {
+        INSTANCE.snoopEnabled = snoopEnabled;
+    }
 }
