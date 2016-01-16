@@ -3,7 +3,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>eu.agilejava</groupId>
    <artifactId>snoop</artifactId>
-   <version>1.3.2</version>
+   <version>1.3.3-SNAPSHOT</version>
    <packaging>jar</packaging>
 
    <name>SnoopEE</name>
@@ -12,7 +12,7 @@
    <parent>
       <groupId>eu.agilejava</groupId>
       <artifactId>snoop-root</artifactId>
-      <version>1.3.2</version>
+      <version>1.3.3-SNAPSHOT</version>
    </parent>
 
    <dependencies>
@@ -20,7 +20,7 @@
       <dependency>
          <groupId>eu.agilejava</groupId>
          <artifactId>snoop-client</artifactId>
-         <version>1.3.2</version>
+         <version>1.3.3-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
