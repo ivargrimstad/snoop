@@ -20,7 +20,7 @@
 
 .. Or by system property
 
- -DsnoopService: 192.168.59.103:8081/snoop-service/
+ -DsnoopService=192.168.59.103:8081/snoop-service/
 
 . To discover a service, use the @Snoop qualifier to inject a client to the registered service.
 +
