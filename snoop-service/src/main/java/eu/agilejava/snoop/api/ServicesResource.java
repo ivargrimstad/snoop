@@ -52,7 +52,8 @@ public class ServicesResource {
 
       final Collection<SnoopConfig> serviceConfigs = snoopClientRegistry.getServiceConfigs();
 
-      return Response.ok(new GenericEntity<Collection<SnoopConfig>>(serviceConfigs) {}).build();
+      return Response.ok(new GenericEntity<Collection<SnoopConfig>>(serviceConfigs) {})
+              .header("Access-Control-Allow-Origin", "*").build();
    }
 
    @GET
