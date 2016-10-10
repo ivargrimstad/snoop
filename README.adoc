@@ -2,6 +2,8 @@
 
 SnoopEE [ˈsnuːpı] is an experimental registration and discovery service for Java EE based microservices.
 
+SnoopEE 2.x has a new repo location. Go to the link:https://github.com/ivargrimstad/snoopee[new SnoopEE GitHub Repo]
+
 == Getting Started
 
 . Start the link:snoop-service.adoc[Snoop Service]
